@@ -24,7 +24,7 @@ export default {
         this.isshow = false;
       }
       //在Mine页面隐藏头部
-      if (route.name === "Mine") {
+      if (route.name === "Mine" || route.name === "Login") {
         this.isfoshow = false;
       } else {
         this.isfoshow = true;

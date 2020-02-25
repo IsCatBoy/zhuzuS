@@ -1,14 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home/Home.vue"
+import Home from "../views/Home/Home.vue";
 import News from "../views/News/News.vue";
 import Search from "../views/Search/Search.vue";
 import Mine from "../views/Mine/Mine.vue";
 import Release from "../views/Release/Release.vue";
 import Login from "../views/login_register/Login.vue";
+import Chat from "../views/Chat/Chat.vue";
 Vue.use(VueRouter);
 
-const routes = [{
+const routes = [
+    {
         path: "/",
         name: "Home",
         component: Home,
@@ -54,6 +56,14 @@ const routes = [{
         component: Login,
         meta: {
             title: "登录"
+        }
+    },
+    {
+        path: "/chat",
+        name: "Chat",
+        component: Chat,
+        meta: {
+            title: "我的"
         }
     }
 ];
