@@ -47,7 +47,7 @@ export default {
           icon: "newicon",
           active: "selnewicon",
           name: "消息",
-          path: "/new"
+          path: "/news"
         },
         {
           icon: "mineicon",
