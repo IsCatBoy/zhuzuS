@@ -16,7 +16,7 @@ export default {
   },
   components: {},
   created() {
-    this.$emit('footer',false)
+    // this.$emit('footer',false)
   }
 };
 </script>

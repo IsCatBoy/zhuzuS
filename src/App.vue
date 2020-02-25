@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <LWFooter v-if="footer_show"></LWFooter>
-    <router-view @header="header" @footer="footer"></router-view>
-    <LWHeader v-if="header_show"></LWHeader>
+    <LWFooter></LWFooter>
+    <router-view></router-view>
+    <LWHeader></LWHeader>
   </div>
 </template>
 <script>
@@ -11,12 +11,8 @@ import LWHeader from "./components/header";
 import LWFooter from "./components/footer";
 export default {
   name: "App",
-  data(){
-  return{
-    footer_show:true,
-    header_show:true,
-  }
-  
+  data() {
+    return {};
   },
   components: {
     LWHeader,
@@ -25,15 +21,8 @@ export default {
   methods: {
     goto(id) {
       this.$router.push(id);
-    },
-    header(bool){
-      this.header_show = bool
-    },
-    footer(bool){
-      this.footer_show = bool
-    
     }
-  },
+  }
 };
 </script>
 
