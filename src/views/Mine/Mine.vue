@@ -1,12 +1,7 @@
 <template>
-<<<<<<< HEAD
   <div class="page mine">
     <MineHead></MineHead>
     <MineMain></MineMain>
-=======
-  <div class="page Mine">this is Mine page
-  
->>>>>>> cadd720d152497eb6d9c7e5162b64ad23e4a75db
   </div>
 </template>
 

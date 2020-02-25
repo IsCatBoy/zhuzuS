@@ -71,9 +71,11 @@ li {
     }
   }
   .form {
-    position: absolute;
-    top: 2.61rem;
-    left: 0.43rem;
+   position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  
     .ipt {
       width: 2.79rem;
       height: 0.38rem;
@@ -87,8 +89,9 @@ li {
   }
   .btn {
     position: absolute;
-    top: 4rem;
-    left: 0.93rem;
+    left: 50%;
+    top: 63%;
+    transform: translate(-50%,-50%);
     width: 1.46rem;
     height: 0.36rem;
     border: 0.005rem solid white;
@@ -105,8 +108,11 @@ li {
     }
   }
 .tip{
-  position: absolute;
-  bottom: .44rem;
+  width: 3rem;
+   position: absolute;
+    left: 50%;
+    top: 92%;
+    transform: translate(-50%,-50%);
 }
 }
 </style>
