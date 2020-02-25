@@ -1,6 +1,6 @@
 <template>
   <div class="page Mine">this is Mine page
-    <router-link to="/login">登录</router-link>
+  
   </div>
 </template>
 
