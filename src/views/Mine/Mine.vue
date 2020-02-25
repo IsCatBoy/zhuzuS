@@ -1,5 +1,7 @@
 <template>
-  <div class="page Mine">this is Mine page</div>
+  <div>
+    <!-- <img :src="imgUrl" alt=""> -->
+    </div>
 </template>
 
 <script>
@@ -7,6 +9,11 @@
 
 export default {
   name: "Mine",
+  data(){
+    return {
+      // imgUrl:require ("../../assets/loginPage/bannerlogin@3x.png")
+    }
+  },
   components: {},
   created() {
     this.$emit('footer',false)
