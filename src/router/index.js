@@ -5,6 +5,9 @@ import News from "../views/News/News.vue";
 import Search from "../views/Search/Search.vue";
 import Mine from "../views/Mine/Mine.vue";
 import Release from "../views/Release/Release.vue";
+import MineHead from "../views/Mine/MineChind.vue/MineHead.vue";
+import MineMain from "../views/Mine/MineChind.vue/MineMain.vue";
+
 Vue.use(VueRouter);
 
 const routes = [{
@@ -46,6 +49,16 @@ const routes = [{
         meta: {
             title: "我的"
         }
+    },
+    {
+        path: "/minehead",
+        name: "MineHead",
+        component: MineHead
+    },
+    {
+        path: "/minemain",
+        name: "MineMain",
+        component: MineMain
     }
 ];
 

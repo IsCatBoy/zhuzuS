@@ -1,20 +1,24 @@
 <template>
-  <div>
-    <!-- <img :src="imgUrl" alt=""> -->
-    </div>
+  <div class="page mine">
+    <MineHead></MineHead>
+    <MineMain></MineMain>
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import MineHead from "./MineChind.vue/MineHead.vue";
+import MineMain from "./MineChind.vue/MineMain.vue";
 
 export default {
   name: "Mine",
-  data(){
-    return {
-      // imgUrl:require ("../../assets/loginPage/bannerlogin@3x.png")
-    }
+  data() {
+    return {};
   },
-  components: {},
+  components: {
+    MineHead,
+    MineMain
+  },
   created() {
     // this.$emit('footer',false)
   }
@@ -22,16 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-body,
-html,
-#app {
-  height: 100%;
-}
-#app {
-  font-size: 16px;
-}
 .page {
   height: calc(100% - 49px);
-  overflow: scroll;
 }
 </style>
