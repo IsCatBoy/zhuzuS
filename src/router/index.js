@@ -5,6 +5,7 @@ import News from "../views/News/News.vue";
 import Search from "../views/Search/Search.vue";
 import Mine from "../views/Mine/Mine.vue";
 import Release from "../views/Release/Release.vue";
+import Login from "../views/login_register/Login.vue";
 Vue.use(VueRouter);
 
 const routes = [{
@@ -45,6 +46,14 @@ const routes = [{
         component: Mine,
         meta: {
             title: "我的"
+        }
+    },
+    {
+        path: "/login",
+        name: "Login",
+        component: Login,
+        meta: {
+            title: "登录"
         }
     }
 ];

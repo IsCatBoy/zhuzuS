@@ -54,6 +54,12 @@ export default {
           active: "selmineicon",
           name: "我的",
           path: "/mine"
+        },
+         {
+      
+          active: "selmineicon",
+          name: "登录",
+          path: "/login"
         }
       ]
     };
