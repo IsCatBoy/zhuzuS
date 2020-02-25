@@ -230,6 +230,9 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.page {
+  height: calc(100% - 64px);
+}
 .Chat {
   position: relative;
   .web-im {

@@ -105,6 +105,9 @@ li {
     top: 4rem;
     li {
       margin-right: 0.3rem;
+      &:nth-child(3) {
+        margin-right: 0;
+      }
     }
   }
 .tip{
