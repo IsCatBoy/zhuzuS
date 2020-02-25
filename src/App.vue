@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <LWFooter></LWFooter>
-    <router-view />
+    <router-view></router-view>
     <LWHeader></LWHeader>
   </div>
 </template>
@@ -11,6 +11,9 @@ import LWHeader from "./components/header";
 import LWFooter from "./components/footer";
 export default {
   name: "App",
+  data() {
+    return {};
+  },
   components: {
     LWHeader,
     LWFooter
@@ -19,7 +22,7 @@ export default {
     goto(id) {
       this.$router.push(id);
     }
-  },
+  }
 };
 </script>
 
