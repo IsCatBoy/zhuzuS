@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div v-show="isfoshow" class="footer">
     <span v-show="isshow" class="back" @click="comeBack">返回</span>
     <div class="footer-text">{{ title }}</div>
   </div>
@@ -9,6 +9,7 @@ export default {
   name: "LWFooter",
   data() {
     return {
+      isfoshow: true,
       isshow: false,
       title: "驻足"
     };
@@ -21,6 +22,12 @@ export default {
         this.isshow = true;
       } else {
         this.isshow = false;
+      }
+      //在Mine页面隐藏头部
+      if (route.name === "Mine") {
+        this.isfoshow = false;
+      } else {
+        this.isfoshow = true;
       }
     }
   },

@@ -9,7 +9,7 @@ export default {
   name: "Mine",
   components: {},
   created() {
-    this.$emit('footer',false)
+    // this.$emit('footer',false)
   }
 };
 </script>
