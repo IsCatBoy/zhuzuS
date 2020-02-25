@@ -54,6 +54,12 @@ export default {
           active: "selmineicon",
           name: "我的",
           path: "/mine"
+        },
+        {
+          icon: "mineicon",
+          active: "selmineicon",
+          name: "登录",
+          path: "/login"
         }
       ]
     };
@@ -61,7 +67,7 @@ export default {
   watch: {
     $route(route) {
       console.log(route);
-      if (route.name === "Details") {
+      if (route.name === "Login") {
         this.isshow = false;
       } else {
         this.isshow = true;
