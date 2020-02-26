@@ -12,6 +12,7 @@ import Login from "../views/login_register/Login.vue";
 import Chat from "../views/Chat/Chat.vue";
 import MineShare from "../views/Mine/MineChind.vue/MineShare.vue";
 import Newsres from "../views/News/Newsres.vue";
+import Focus from "../views/Focus/Focus.vue";
 
 Vue.use(VueRouter);
 
@@ -134,6 +135,11 @@ const routes = [{
         meta: {
             title: "通用设置"
         }
+    },
+    {
+        path: "/focus",
+        name: "Focus",
+        component: Focus
     },
 ];
 

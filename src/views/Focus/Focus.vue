@@ -1,34 +1,21 @@
 <template>
-  <div class="page mine">
-    <div class="mineTop">
+  <div class="page focus">
+      <div class="focusTop">
       <MineHead :imgUrl="imgUrl"></MineHead>
-      <MineMain v-for="(item, index) in dataMain" :key="index" :itemMain="item"></MineMain>
-      <div class="sign">
+       <MineMain v-for="(item, index) in dataMain" :key="index" :itemMain="item"></MineMain>
+<div class="sign">
         <div class="signIcon">
           <img src="../../assets/minePage/Collection@3x.png" alt />
-          <div></div>
-        </div>
-        <div class="signIcon">
-          <img src="../../assets/minePage/lovestar@3x.png" alt />
           <div class="signLine"></div>
         </div>
         <div class="signIcon">
-          <img src="../../assets/minePage/AIT@3x.png" alt />
-          <div></div>
+          <img src="../../assets/minePage/lovestar@3x.png" alt />
+          <div ></div>
         </div>
       </div>
-      <!-- 二维码，设置 -->
-      <div class="QRSet">
-        <div @click="BtnFocus" class="QRcode">
-          <img src="../../assets/minePage/QRcode@3x.png" alt />
-        </div>
-        <div @click="BtnSet" class="mySet">
-          <img src="../../assets/minePage/Setup@3x.png" alt />
-        </div>
       </div>
-    </div>
 
-    <section class="shareSet">
+      <section class="shareSet">
       <MineShare
         class="shareCom"
         v-for="(item, index) in data"
@@ -45,16 +32,28 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import MineHead from "./MineChind.vue/MineHead.vue";
-import MineMain from "./MineChind.vue/MineMain.vue";
-import MineShare from "./MineChind.vue/MineShare.vue";
+import MineHead from "../Mine/MineChind.vue/MineHead.vue";
+import MineMain from "../Mine/MineChind.vue/MineMain.vue";
+import MineShare from "../Mine/MineChind.vue/MineShare.vue";
 
 export default {
-  name: "Mine",
-  data() {
-    return {
-      data: [
+  name: "Focus",
+  data(){
+      return {
+      imgUrl: require("../../assets/minePage/251581178791_.pic_hd@3x.png"),
+       dataMain: [
+        {
+          headPortrait: require("../../assets/minePage/Headportrait@3x.png"),
+          nickname: "冷太阳",
+          gender: require("../../assets/minePage/Gender@3x.png"),
+          userId: 6926392032,
+          address: require("../../assets/minePage/address@3x.png"),
+          cityName: "成都",
+          attention: 555,
+          myFans: 2020
+        }
+      ],
+ data: [
         {
           shareImg: require("../../assets/minePage/191580582922_.pic@3x.png"),
           shareComment: "慢生活",
@@ -88,46 +87,22 @@ export default {
           like: require("../../assets/minePage/liked@3x.png")
         }
       ],
-      imgUrl: require("../../assets/minePage/bannerone.pic_hd@3x.png"),
-
-      dataMain: [
-        {
-          headPortrait: require("../../assets/minePage/Headportrait@3x.png"),
-          nickname: "Mondoli",
-          gender: require("../../assets/minePage/Gender@3x.png"),
-          userId: 6926392032,
-          address: require("../../assets/minePage/address@3x.png"),
-          cityName: "成都",
-          attention: 5,
-          myFans: 1928
-        }
-      ]
-    };
+      }
   },
-  components: {
-    MineHead,
-    MineMain,
-    MineShare
-  },
-  methods: {
-    BtnSet() {
-      console.log("set");
-      this.$router.push("/set");
-    },
-    BtnFocus(){
-      this.$router.push("/focus")
-    }
+  components:{
+      MineHead,
+      MineMain,
+      MineShare
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.page {
-  height: calc(100% - 49px);
-  .mineTop {
+.page{
+    height: 100%;
     .sign {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-around;
       margin: 0.16rem 0 0.19rem 0;
 
       .signIcon {
@@ -142,29 +117,8 @@ export default {
         background-color: #6fa7dd;
       }
     }
-    .QRSet {
-      position: absolute;
-      z-index: 2;
-      right: 0.17rem;
-      top: 0.325rem;
-      .QRcode {
-        width: 0.15rem;
-        display: inline-block;
-        margin-right: 0.14rem;
-        img {
-          width: 100%;
-        }
-      }
-      .mySet {
-        display: inline-block;
-        width: 0.165rem;
-        img {
-          width: 100%;
-        }
-      }
-    }
-  }
 
+    
   .shareSet {
     margin: 0 0.025rem;
     display: flex;

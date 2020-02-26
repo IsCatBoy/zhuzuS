@@ -61,12 +61,6 @@ export default {
           name: "登录",
           path: "/login"
         },
-        {
-          icon: "seticon",
-          active: "selmineicon",
-          name: "设置",
-          path: "/set"
-        }
       ]
     };
   },
@@ -79,7 +73,8 @@ export default {
         route.name === "Set" ||
         route.name === "Infomation" ||
         route.name === "Common" ||
-        route.name === "Privacy"
+        route.name === "Privacy" ||
+        route.name === "Focus"
       ) {
         this.isshow = false;
       } else {
