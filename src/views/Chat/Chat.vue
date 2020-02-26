@@ -86,6 +86,20 @@ export default {
     }
   },
   methods: {
+    // 切换到群聊
+    triggerGroup() {
+      this.bridge = [];
+      this.title = "群聊";
+    },
+    // 切到具体个人
+    triggerPersonal(item) {
+      if (this.uid === item.uid) {
+        return;
+      }
+      // 将当前用户uid，和需要对话的uid放入bridge
+      this.bridge = [this.uid, item.uid];
+      this.title = "和" + item.nickname + "聊天";
+    },
     //实现滚动默认下方
     scrollToBottom() {
       this.$nextTick(() => {
@@ -138,10 +152,11 @@ export default {
       );
       this.msg = "";
     },
+    //链接对话
     conWebSocket() {
       let vm = this;
       if (window.WebSocket) {
-        vm.socket = new WebSocket("ws://175.24.82.120:8001");
+        vm.socket = new WebSocket("ws://192.168.101.108:8001");
         let socket = vm.socket;
 
         socket.onopen = function(e) {

@@ -10,6 +10,8 @@ import MineMain from "../views/Mine/MineChind.vue/MineMain.vue";
 
 import Login from "../views/login_register/Login.vue";
 import Chat from "../views/Chat/Chat.vue";
+import Newsres from "../views/News/Newsres.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -63,7 +65,7 @@ const routes = [
         name: "MineMain",
         component: MineMain
     },
-        {
+    {
         path: "/login",
         name: "Login",
         component: Login,
@@ -77,6 +79,14 @@ const routes = [
         component: Chat,
         meta: {
             title: "我的"
+        }
+    },
+    {
+        path: "/newsres",
+        name: "Newsres",
+        component: Newsres,
+        meta: {
+            title: "消息"
         }
     }
 ];
