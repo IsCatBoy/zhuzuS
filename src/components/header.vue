@@ -73,7 +73,14 @@ export default {
   watch: {
     $route(route) {
       console.log(route);
-      if (route.name === "Login" || route.name === "Chat" || route.name === "Set" || route.name === "Infomation" || route.name === "Common" || route.name === "Privacy") {
+      if (
+        route.name === "Login" ||
+        route.name === "Chat" ||
+        route.name === "Set" ||
+        route.name === "Infomation" ||
+        route.name === "Common" ||
+        route.name === "Privacy"
+      ) {
         this.isshow = false;
       } else {
         this.isshow = true;

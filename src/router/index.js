@@ -11,11 +11,11 @@ import MineCompile from "../views/Mine/MineChind.vue/MineTip/MineCompile.vue"
 import Login from "../views/login_register/Login.vue";
 import Chat from "../views/Chat/Chat.vue";
 import MineShare from "../views/Mine/MineChind.vue/MineShare.vue";
+import Newsres from "../views/News/Newsres.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-    {
+const routes = [{
         path: "/",
         name: "Home",
         component: Home,
@@ -65,7 +65,7 @@ const routes = [
         name: "MineMain",
         component: MineMain
     },
-        {
+    {
         path: "/login",
         name: "Login",
         component: Login,
@@ -95,37 +95,45 @@ const routes = [
         path: "/set",
         name: "Set",
         component: () =>
-      import("../views/Set/Set.vue"),
-      meta: {
-        title: "设置"
-    }
+            import("../views/Set/Set.vue"),
+        meta: {
+            title: "设置"
+        }
     },
     {
         path: "/privacy",
         name: "Privacy",
         component: () =>
-      import("../views/Set/Privacy.vue"),
-      meta: {
-        title: "隐私"
-    }
+            import("../views/Set/Privacy.vue"),
+        meta: {
+            title: "隐私"
+        }
     },
     {
         path: "/infomation",
         name: "Infomation",
         component: () =>
-      import("../views/Set/Infomation.vue"),
-      meta: {
-        title: "个人资料"
-    }
+            import("../views/Set/Infomation.vue"),
+        meta: {
+            title: "个人资料"
+        }
+    },
+    {
+        path: "/newsres",
+        name: "Newsres",
+        component: Newsres,
+        meta: {
+            title: "消息"
+        }
     },
     {
         path: "/common",
         name: "Common",
         component: () =>
-      import("../views/Set/Common.vue"),
-      meta: {
-        title: "通用设置"
-    }
+            import("../views/Set/Common.vue"),
+        meta: {
+            title: "通用设置"
+        }
     },
 ];
 

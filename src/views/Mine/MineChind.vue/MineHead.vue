@@ -11,7 +11,6 @@ export default {
   name: "MineHead",
   data() {
     return {
-      // imgUrl: require("../../../assets/minePage/bannerone.pic_hd@3x.png")
     };
   },
   props:{
