@@ -130,7 +130,7 @@ export default {
         background-image: url("../assets/tabicons/homepage@3x.png");
       }
       .selhomeicon {
-        background-image: url("../assets/tabicons/homepage@3x.png");
+        background-image: url("../assets/tabicons/Selhomepage@3x.png");
       }
       .abouticon {
         background-image: url("../assets/tabicons/search@3x.png");

@@ -36,7 +36,7 @@ export default {
   },
   watch: {
     $route(route) {
-      //   console.log(route);
+      console.log(route);
     }
   },
   components: {
