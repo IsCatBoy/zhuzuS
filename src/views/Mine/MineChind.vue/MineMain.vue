@@ -38,17 +38,15 @@
 </template>
 
 <script>
-import MineCompile from "./MineTip/MineCompile.vue"
+import MineCompile from "./MineTip/MineCompile.vue";
 export default {
   name: "MineMain",
-  components:{MineCompile},
+  components: { MineCompile },
   data() {
-    return {
-     
-    };
+    return {};
   },
-  props:{
-    itemMain:Object
+  props: {
+    itemMain: Object
   }
 };
 </script>
@@ -106,9 +104,9 @@ export default {
         margin-right: 0.1rem;
         vertical-align: 0.03rem;
       }
-    };
-    .compile{
-      display: inline-block
+    }
+    .compile {
+      display: inline-block;
     }
   }
   .fans {
