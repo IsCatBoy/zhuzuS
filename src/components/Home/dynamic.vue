@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="swipers">
-      <swiper :options="swiperOption">
+      <swiper >
         <swiperSlide v-for="i in 5" :key="i">
           <img src="../../assets/indexPage/261580746703_.pic@3x.png" alt />
         </swiperSlide>
