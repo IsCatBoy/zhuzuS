@@ -1,29 +1,47 @@
 <template>
-  <div class="page login">
-    <div class="title">
-      <div>驻足</div>
-      <div>分享美好生活</div>
+  <div class="page login" :class="{turnBackGround:tBackGround}">
+    <div class="cotent" v-if="isShow">
+      <div class="title">
+        <div>驻足</div>
+        <div>分享美好生活</div>
+      </div>
+      <form action class="form">
+        <img src="../../assets/loginPage/userIcon.png" alt class="img1" />
+        <input class="ipt" type="text" name="username" placeholder="请输入手机号码" />
+        <br />
+        <img src="../../assets/loginPage/passwordIcon.png" alt class="img2" />
+        <input class="ipt" type="password" name="password" placeholder="请输入验证码" />
+        <div class="forget">忘记密码？</div>
+      </form>
+      <button class="btn" @click="showUserTips">登录</button>
+      <ul class="incon">
+        <li>
+          <img src="../../assets/loginPage/weixinicon.png" alt />
+        </li>
+        <li>
+          <img src="../../assets/loginPage/weiboicon.png" alt />
+        </li>
+        <li>
+          <img src="../../assets/loginPage/qqicon.png" alt />
+        </li>
+      </ul>
+      <div class="tip">
+        <span>注册/登录表示同意</span>
+        <router-link to="/#">用户协议|隐私条款</router-link>
+      </div>
     </div>
-    <form action class="form">
-      <input class="ipt" type="text" name="username" placeholder="请输入手机号码" />
-      <br />
-      <input class="ipt" type="password" name="password" placeholder="请输入验证码" />
-    </form>
-    <button class="btn">登录</button>
-    <ul class="incon">
-      <li>
-        <img src="../../assets/loginPage/weixinicon.png" alt />
-      </li>
-      <li>
-        <img src="../../assets/loginPage/weiboicon.png" alt />
-      </li>
-      <li>
-        <img src="../../assets/loginPage/qqicon.png" alt />
-      </li>
-    </ul>
-    <div class="tip">
-      <span>注册/登录表示同意</span>
-      <a>用户协议|隐私条款</a>
+    <div class="user_tips_box" v-else>
+      <div class="user_tips">
+        <h3 class="top_ti">温馨提示</h3>
+        <div class="des">
+          欢迎使用驻足！驻足非常重视您的隐私和个人资料保护。在您使用驻足之前，请先仔细阅读
+          <router-link to="/#">《用户协议》及《隐私条款》</router-link>
+        </div>
+        <div class="user_btn">
+          <button class="btn" @click="turnWhite" :class="{active:isn}">不同意</button>
+          <button class="btn" @click="turnWhite" :class="{active:isw}">同意</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -33,7 +51,24 @@
 export default {
   name: "login",
   data() {
-    return {};
+    return {
+      isShow: true,
+      isw: true,
+      isn: false,
+      tBackGround: false
+    };
+  },
+  methods: {
+    turnWhite() {
+      this.isw = !this.isw;
+      this.isn = !this.isn;
+      console.log("2");
+    },
+    showUserTips() {
+      this.tBackGround = !this.tBackGround;
+      this.isShow = !this.isShow;
+      console.log("背景变");
+    }
   }
 };
 </script>
@@ -44,78 +79,153 @@ li {
   margin: 0;
   list-style: none;
 }
-.page {
+.active {
+  background: #ffffff !important;
+  color: #000 !important;
+}
+.turnBackGround {
+  background-color: rgba(0, 0, 0, 0.8) !important;
   height: 100%;
-  background: url("../../assets/loginPage/bannerlogin.png") no-repeat;
+  background: url("../../assets/loginPage/bannerlogin@3x.png") no-repeat;
   background-size: cover;
   position: relative;
+}
+.page {
+  height: 100%;
+  background: url("../../assets/loginPage/bannerlogin@3x.png") no-repeat;
+  background-size: cover;
+  position: relative;
+
+  .cotent {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    .title {
+      text-align: center;
+      position: absolute;
+      top: -126%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ffffff;
+
+      :nth-child(1) {
+        font-size: 0.4rem;
+        letter-spacing: -0.9rem;
+      }
+      :nth-child(2) {
+        font-size: 0.15rem;
+        letter-spacing: 0.06rem;
+        margin-left: -0.2rem;
+      }
+    }
+    .form {
+      position: relative;
+      top: 95%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      .img1 {
+        position: absolute;
+        top: 17%;
+        left: 6%;
+      }
+      .img2 {
+        position: absolute;
+        top: 67%;
+        left: 6%;
+      }
+      .ipt {
+        width: 2.79rem;
+        height: 0.43rem;
+        margin: 0.095rem auto;
+        border-radius: 0.19rem;
+        background-color: rgba(0, 0, 0, 0.1);
+        color: #ffffff;
+        border: 0.005rem solid white;
+        outline: none;
+        padding-left: .4rem
+      }
+      .forget {
+        position: absolute;
+        left: 77%;
+        top: 113%;
+        color: #ffffff;
+        font-size: 0.1rem;
+      }
+    }
+    .btn {
+      position: absolute;
+      left: 50%;
+      top: 116%;
+      transform: translate(-50%, -50%);
+      width: 1.46rem;
+      height: 0.36rem;
+      border: 0.005rem solid white;
+      border-radius: 0.19rem;
+      outline: none;
+    }
+    .incon {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      top: 2rem;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      li {
+        margin-right: 0.3rem;
+        &:nth-child(3) {
+          margin-right: 0;
+        }
+      }
+    }
+    .tip {
+      width: 3rem;
+      position: absolute;
+      left: 50%;
+      top: 280%;
+      transform: translate(-50%, -50%);
+      color: #ffffff;
+    }
+  }
   // 设置placeholder的颜色
   input::-webkit-input-placeholder {
     color: #fff;
+    letter-spacing: 0.05rem;
+    text-indent: 0.5rem;
   }
-  .title {
-    text-align: center;
-    position: relative;
-    top: 1.15rem;
-    left: 0;
-    color: #ffffff;
 
-    :nth-child(1) {
-      font-size: 0.4rem;
-      letter-spacing: 0.3rem;
-    }
-    :nth-child(2) {
-      font-size: 0.15rem;
-      letter-spacing: 0.06rem;
-      margin-left: -0.2rem;
-    }
-  }
-  .form {
-   position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-  
-    .ipt {
-      width: 2.79rem;
-      height: 0.38rem;
-      margin: 0.065rem auto;
-      border-radius: 0.19rem;
-      background-color: rgba(0, 0, 0, 0.1);
-      color: #ffffff;
-      border: 0.005rem solid white;
-      outline: none;
-    }
-  }
-  .btn {
+  .user_tips_box {
+    width: 100%;
+    height: 3rem;
+    background: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
     position: absolute;
+    top: 85%;
     left: 50%;
-    top: 63%;
-    transform: translate(-50%,-50%);
-    width: 1.46rem;
-    height: 0.36rem;
-    border: 0.005rem solid white;
-    border-radius: 0.19rem;
-    outline: none;
-  }
-  .incon {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    top: 4rem;
-    li {
-      margin-right: 0.3rem;
-      &:nth-child(3) {
-        margin-right: 0;
+    transform: translate(-50%, -50%);
+    .user_tips {
+      width: 75%;
+      margin: 0 auto;
+      .des {
+        font-size: 0.15rem;
+        line-height: 0.27rem;
+      }
+      .user_btn {
+        margin-top: 0.3rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        .btn {
+          width: 1.26rem;
+          height: 0.3rem;
+          background-color: rgba(0, 0, 0, 0.2);
+          color: #ffffff;
+          border-radius: 0.18rem;
+          outline: none;
+          border: .5px solid white
+        }
       }
     }
   }
-.tip{
-  width: 3rem;
-   position: absolute;
-    left: 50%;
-    top: 92%;
-    transform: translate(-50%,-50%);
-}
 }
 </style>
