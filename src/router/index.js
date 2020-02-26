@@ -7,9 +7,11 @@ import Mine from "../views/Mine/Mine.vue";
 import Release from "../views/Release/Release.vue";
 import MineHead from "../views/Mine/MineChind.vue/MineHead.vue";
 import MineMain from "../views/Mine/MineChind.vue/MineMain.vue";
-
+import MineCompile from "../views/Mine/MineChind.vue/MineTip/MineCompile.vue"
 import Login from "../views/login_register/Login.vue";
 import Chat from "../views/Chat/Chat.vue";
+import MineShare from "../views/Mine/MineChind.vue/MineShare.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -78,7 +80,53 @@ const routes = [
         meta: {
             title: "我的"
         }
+    },
+    {
+        path: "/minecompile",
+        name: "MineCompile",
+        component: MineCompile
+    },
+    {
+        path: "/mineshare",
+        name: "MineShare",
+        component: MineShare
+    },
+    {
+        path: "/set",
+        name: "Set",
+        component: () =>
+      import("../views/Set/Set.vue"),
+      meta: {
+        title: "设置"
     }
+    },
+    {
+        path: "/privacy",
+        name: "Privacy",
+        component: () =>
+      import("../views/Set/Privacy.vue"),
+      meta: {
+        title: "隐私"
+    }
+    },
+    {
+        path: "/infomation",
+        name: "Infomation",
+        component: () =>
+      import("../views/Set/Infomation.vue"),
+      meta: {
+        title: "个人资料"
+    }
+    },
+    {
+        path: "/common",
+        name: "Common",
+        component: () =>
+      import("../views/Set/Common.vue"),
+      meta: {
+        title: "通用设置"
+    }
+    },
 ];
 
 const router = new VueRouter({
