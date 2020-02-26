@@ -4,17 +4,17 @@
       <MineHead :imgUrl="imgUrl"></MineHead>
       <MineMain v-for="(item, index) in dataMain" :key="index" :itemMain="item"></MineMain>
       <div class="sign">
-        <div class="signIcon">
+        <div class="signIcon" @click="qiehuan(1)">
           <img src="../../assets/minePage/Collection@3x.png" alt />
-          <div></div>
+          <div :class="{ signLine: num == 1 ? true : false }"></div>
         </div>
-        <div class="signIcon">
+        <div class="signIcon" @click="qiehuan(2)">
           <img src="../../assets/minePage/lovestar@3x.png" alt />
-          <div class="signLine"></div>
+          <div :class="{ signLine: num == 2 ? true : false }"></div>
         </div>
-        <div class="signIcon">
+        <div class="signIcon" @click="qiehuan(3)">
           <img src="../../assets/minePage/AIT@3x.png" alt />
-          <div></div>
+          <div :class="{ signLine: num == 3 ? true : false }"></div>
         </div>
       </div>
       <!-- 二维码，设置 -->
@@ -54,6 +54,7 @@ export default {
   name: "Mine",
   data() {
     return {
+      num: 1,
       data: [
         {
           shareImg: require("../../assets/minePage/191580582922_.pic@3x.png"),
@@ -110,12 +111,17 @@ export default {
     MineShare
   },
   methods: {
+    //切换
+    qiehuan(nums) {
+      this.num = nums;
+    },
+
     BtnSet() {
       console.log("set");
       this.$router.push("/set");
     },
-    BtnFocus(){
-      this.$router.push("/focus")
+    BtnFocus() {
+      this.$router.push("/focus");
     }
   }
 };

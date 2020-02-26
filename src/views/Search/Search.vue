@@ -1,12 +1,13 @@
 <template>
-  <div class="page Search">this is Search page</div>
+  <div class="page Search"></div>
 </template>
-
 <script>
-// @ is an alias to /src
-
 export default {
   name: "Search",
-  components: {}
+  data() {
+    return {};
+  }
 };
 </script>
+<style lang="scss" scoped>
+</style>
