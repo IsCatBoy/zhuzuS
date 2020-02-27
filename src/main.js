@@ -6,6 +6,11 @@ import "mint-ui/lib/style.css";
 import Axios from "axios";
 import Vant from "vant";
 import "vant/lib/index.css";
+import { Lazyload } from "vant";
+
+Vue.use(Lazyload, {
+  lazyComponent: true
+});
 
 Vue.use(Vant);
 
