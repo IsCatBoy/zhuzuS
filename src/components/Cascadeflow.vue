@@ -114,7 +114,7 @@ export default {
         newImg.src = this.moments[j];
 
         // 图片加载完成后（异步）
-        newImg.onload = newImg.imgArr = e => {
+        newImg.onload = newImg.imgArr = () => {
           // 四个管道的高度
           var arr = [
             that.$refs.pipingone.offsetHeight,
