@@ -1,12 +1,23 @@
 <template>
   <div class="page privacy">
-    <p>隐私</p>
+      <VSwitch v-for="(item,index) in data" :key="index" :items="item" />
   </div>
 </template>
 
 <script>
+import VSwitch from "../../components/switch.vue";
 export default {
-  name: "Privacy"
+  components: { VSwitch },
+  name: "Privacy",
+  data() {
+    return {
+      data: [
+        { titles: "允许向往推荐通讯好友", checked: true },
+        { titles: "允许把我推荐给其他好友", checked: true }
+      ]
+    };
+  },
+ 
 };
 </script>
 
