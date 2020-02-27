@@ -4,7 +4,7 @@
       <MineHead :imgUrl="imgUrl"></MineHead>
       <MineMain v-for="(item, index) in dataMain" :key="index" :itemMain="item"></MineMain>
       <div class="sign">
-        <div class="signIcon">
+        <div class="signIcon" @click="qiehuan(1)">
           <img src="../../assets/minePage/Collection@3x.png" alt />
           <div :class="{ signLine: num == 1 ? true:false}"></div>
         </div>
@@ -111,6 +111,11 @@ export default {
     MineShare
   },
   methods: {
+    //切换
+    qiehuan(nums) {
+      this.num = nums;
+    },
+
     BtnSet() {
       console.log("set");
       this.$router.push("/set");

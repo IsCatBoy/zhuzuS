@@ -44,7 +44,6 @@
     </section> -->
   </div>
 </template>
-
 <script>
 // @ is an alias to /src
 import MineShare from '../Mine/MineChind.vue/MineShare.vue'
