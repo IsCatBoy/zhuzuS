@@ -1,5 +1,4 @@
 <template>
-<<<<<<< Updated upstream
   <div class="page Search">
     <div class="SearchTop">
       <div class="sign">
@@ -44,9 +43,6 @@
       ></MineShare>
     </section>
   </div>
-=======
-  <div class="page about"></div>
->>>>>>> Stashed changes
 </template>
 <script>
 // @ is an alias to /src
@@ -54,7 +50,6 @@ import MineShare from "../Mine/MineChind.vue/MineShare.vue";
 import { Search } from "vant";
 
 export default {
-<<<<<<< Updated upstream
   name: "Search",
   data() {
     return {
@@ -172,10 +167,3 @@ export default {
   }
 }
 </style>
-=======
-  name: "Search"
-};
-</script>
-<style lang="scss" scoped></style>
-
->>>>>>> Stashed changes
