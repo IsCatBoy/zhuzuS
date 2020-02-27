@@ -26,10 +26,10 @@
       </div>
 
       <!-- search -->
-     <van-search v-model="value"  shape="round" placeholder="请输入搜索关键词" />
+      <van-search v-model="value" shape="round" placeholder="请输入搜索关键词" />
     </div>
 
-      <!-- <section class="shareSet">
+    <section class="shareSet">
       <MineShare
         class="shareCom"
         v-for="(item, index) in data"
@@ -41,19 +41,19 @@
         :good="item.good"
         :like="item.like"
       ></MineShare>
-    </section> -->
+    </section>
   </div>
 </template>
 <script>
 // @ is an alias to /src
-import MineShare from '../Mine/MineChind.vue/MineShare.vue'
-
+import MineShare from "../Mine/MineChind.vue/MineShare.vue";
+import { Search } from "vant";
 
 export default {
   name: "Search",
   data() {
     return {
-      value:'',
+      value: "",
       num: 1,
       data: [
         {
@@ -87,8 +87,40 @@ export default {
           userName: "CNU",
           good: 520,
           like: require("../../assets/minePage/liked@3x.png")
+        },
+        {
+          shareImg: require("../../assets/minePage/191580582922_.pic@3x.png"),
+          shareComment: "慢生活",
+          userPhoto: require("../../assets/minePage/HeadONE.pic@3x.png"),
+          userName: "CNU",
+          good: 520,
+          like: require("../../assets/minePage/liked@3x.png")
+        },
+        {
+          shareImg: require("../../assets/minePage/191580582922_.pic@3x.png"),
+          shareComment: "慢生活",
+          userPhoto: require("../../assets/minePage/HeadONE.pic@3x.png"),
+          userName: "CNU",
+          good: 520,
+          like: require("../../assets/minePage/liked@3x.png")
+        },
+        {
+          shareImg: require("../../assets/minePage/191580582922_.pic@3x.png"),
+          shareComment: "慢生活",
+          userPhoto: require("../../assets/minePage/HeadONE.pic@3x.png"),
+          userName: "CNU",
+          good: 520,
+          like: require("../../assets/minePage/liked@3x.png")
+        },
+        {
+          shareImg: require("../../assets/minePage/191580582922_.pic@3x.png"),
+          shareComment: "慢生活",
+          userPhoto: require("../../assets/minePage/HeadONE.pic@3x.png"),
+          userName: "CNU",
+          good: 520,
+          like: require("../../assets/minePage/liked@3x.png")
         }
-      ],
+      ]
     };
   },
   methods: {
@@ -98,7 +130,7 @@ export default {
   },
   components: {
     MineShare,
-    "van-search":Search
+    "van-search": Search
   }
 };
 </script>
@@ -106,19 +138,25 @@ export default {
 <style lang="scss" scoped>
 .page {
   height: calc(100% - 49px);
-  .sign {
-    display: flex;
-    justify-content: space-around;
-    font-size: 0.937em;
-    color: #434343;
-    font-weight: 600;
-    margin: 0.335rem 0 0.11rem;
-    .signLine {
-      border-bottom: 2px solid #6fa7dd;
-      font-size: 1.125em;
-      padding-bottom: 0.02rem;
+  .SearchTop {
+    width: 100%;
+    position: fixed;
+    background-color: white;
+    .sign {
+      display: flex;
+      justify-content: space-around;
+      font-size: 0.937em;
+      color: #434343;
+      font-weight: 600;
+      margin: 0.335rem 0 0.11rem;
+      .signLine {
+        border-bottom: 2px solid #6fa7dd;
+        font-size: 1.125em;
+        padding-bottom: 0.02rem;
+      }
     }
   }
+
   .shareSet {
     margin: 0 0.025rem;
     display: flex;
@@ -128,5 +166,4 @@ export default {
     }
   }
 }
-
 </style>
