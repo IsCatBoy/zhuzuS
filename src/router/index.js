@@ -141,6 +141,12 @@ const routes = [{
         name: "Focus",
         component: Focus
     },
+    {
+        path: "/enjoy",
+        name: "Enjoy",
+        component: () =>
+            import("../views/Enjoy/Enjoy.vue"),
+    },
 ];
 
 const router = new VueRouter({

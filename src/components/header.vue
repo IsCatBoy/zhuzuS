@@ -74,7 +74,8 @@ export default {
         route.name === "Infomation" ||
         route.name === "Common" ||
         route.name === "Privacy" ||
-        route.name === "Focus"
+        route.name === "Focus" ||
+        route.name === "Enjoy"
       ) {
         this.isshow = false;
       } else {

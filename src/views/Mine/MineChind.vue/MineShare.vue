@@ -1,7 +1,7 @@
 <template>
   <div class="mineshare">
     <div class="share">
-      <div class="sharePic">
+      <div class="sharePic" @click="sharePicBtn">
         <img :src="shareImg" alt />
       </div>
 
@@ -37,6 +37,11 @@ export default {
     userName: String,
     good: Number,
     like: String
+  },
+  methods:{
+    sharePicBtn (){
+      this.$router.push('/enjoy')
+    }
   }
 };
 </script>

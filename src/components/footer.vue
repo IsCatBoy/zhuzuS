@@ -27,7 +27,7 @@ export default {
         this.isshow = false;
       }
       //在Mine页面隐藏头部
-      if (route.name === "Mine" || route.name === "Login" || route.name === "Focus" || route.name === "Search") {
+      if (route.name === "Mine" || route.name === "Login" || route.name === "Focus" || route.name === "Search" || route.name === "Enjoy") {
         this.isfoshow = false;
       } else {
         this.isfoshow = true;
