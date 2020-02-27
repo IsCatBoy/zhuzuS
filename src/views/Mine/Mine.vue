@@ -8,11 +8,11 @@
           <img src="../../assets/minePage/Collection@3x.png" alt />
           <div :class="{ signLine: num == 1 ? true:false}"></div>
         </div>
-        <div class="signIcon"  @click="qiehuan(2)">
+        <div class="signIcon" @click="qiehuan(2)">
           <img src="../../assets/minePage/lovestar@3x.png" alt />
           <div :class="{ signLine: num == 2 ? true:false}"></div>
         </div>
-        <div class="signIcon"  @click="qiehuan(3)">
+        <div class="signIcon" @click="qiehuan(3)">
           <img src="../../assets/minePage/AIT@3x.png" alt />
           <div :class="{ signLine: num == 3 ? true:false}"></div>
         </div>
@@ -120,12 +120,13 @@ export default {
       console.log("set");
       this.$router.push("/set");
     },
-    BtnFocus(){
-      this.$router.push("/focus")
-    },
-    qiehuan(nums) {
-      this.num = nums;
+    BtnFocus() {
+      this.$router.push("/focus");
     }
+    // },
+    // qiehuan(nums) {
+    //   this.num = nums;
+    // }
   }
 };
 </script>
@@ -134,7 +135,7 @@ export default {
 .page {
   height: calc(100% - 49px);
   .mineTop {
-      position: relative;
+    position: relative;
     .sign {
       display: flex;
       justify-content: space-evenly;
