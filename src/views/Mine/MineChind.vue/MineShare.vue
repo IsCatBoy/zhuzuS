@@ -1,22 +1,27 @@
 <template>
   <div class="mineshare">
     <div class="share">
+<<<<<<< HEAD
       <div class="sharePic" @click="sharePicBtn">
         <img :src="shareImg" alt />
+=======
+      <div class="sharePic">
+        <img :src="shareImg" alt v-lazy="shareImg" />
+>>>>>>> 2b26dfd1d116aafc2816cc7322cdee13710bb54c
       </div>
 
-      <div class="shareComment">{{shareComment}}</div>
+      <div class="shareComment">{{ shareComment }}</div>
       <div class="shareAll">
         <div class="shareInfo">
           <div class="userPhoto">
-            <img :src="userPhoto" alt />
+            <img :src="userPhoto" alt v-lazy="userPhoto" />
           </div>
-          <div class="userName">{{userName}}</div>
+          <div class="userName">{{ userName }}</div>
         </div>
         <div class="goodLike">
-          <div class="good">{{good}}</div>
+          <div class="good">{{ good }}</div>
           <div class="like">
-            <img :src="like" alt />
+            <img :src="like" alt v-lazy="like" />
           </div>
         </div>
       </div>
@@ -62,7 +67,7 @@ export default {
     color: #1f1f1f;
   }
   .shareAll {
-    margin: 0.03rem 0 0.15rem 0.105rem;
+    margin: 0.03rem 0.105rem 0.105rem;
     color: #5d5d5d;
     display: flex;
     flex-wrap: nowrap;

@@ -1,6 +1,5 @@
 <template>
-  <div class="CopyCascadeflow">
-    <van-button type="default">默认按钮</van-button>
+  <div class="CopyCascadeflow" :style="{ height: maxh + 'px' }">
     <div class="v-waterfall-content" ref="btn" id="v-waterfall">
       <div
         v-for="(img, index) in waterfallList"
@@ -13,19 +12,19 @@
         }"
         @click="clickto(index)"
       >
-        <img :src="img.src" alt />
+        <van-image lazy-load :src="img.src" alt />
         <div class="texts">
           <div class="Textcontent">
             <span class="biaoqian">日本|优雅女人日本|优雅女人日本|优雅女人</span>
           </div>
           <div class="Personal">
             <div class="flexs">
-              <img src="../assets/indexPage/tou1@3x.png" alt srcset />
+              <img :src="imgs" alt v-lazy="imgs" />
               <span class="name">liwang</span>
             </div>
             <div class="flexs">
               <span class="num">12</span>
-              <img src="../assets/IMGS/zan.png" alt />
+              <img :src="imgss" alt v-lazy="imgss" />
             </div>
           </div>
         </div>
@@ -38,6 +37,9 @@ export default {
   name: "CopyCascadeflow",
   data() {
     return {
+      imgs: require("../assets/indexPage/tou1@3x.png"),
+      imgss: require("../assets/IMGS/zan.png"),
+      activeName: 2,
       fullWidth: document.documentElement.clientWidth,
       waterfallList: [], //存放计算好的数据
       waterfallImgCol: 2, //多少列
@@ -46,52 +48,25 @@ export default {
       waterfallImgBottom: 50, //下边距
       waterfallDeviationHeight: [], //存放瀑布流各个列的高度
       imgList: [],
-      imgArr: [
-        require("../assets/IMGS/IMG_1318.jpg"),
-        require("../assets/IMGS/IMG_1315.jpg"),
-        require("../assets/IMGS/IMG_1312.jpg"),
-        require("../assets/IMGS/IMG_1320.jpg"),
-        require("../assets/IMGS/IMG_1314.jpg"),
-        require("../assets/IMGS/IMG_1311.jpg"),
-        require("../assets/IMGS/IMG_1316.jpg"),
-        require("../assets/IMGS/IMG_1317.jpg"),
-        require("../assets/IMGS/IMG_1310.jpg"),
-        require("../assets/IMGS/IMG_1313.jpg"),
-        require("../assets/IMGS/IMG_1319.jpg"),
-        require("../assets/IMGS/IMG_1321.jpg"),
-        require("../assets/IMGS/IMG_1322.jpg"),
-        require("../assets/IMGS/IMG_1323.jpg"),
-        require("../assets/IMGS/IMG_1324.jpg"),
-        require("../assets/IMGS/IMG_1325.jpg"),
-        require("../assets/IMGS/IMG_1326.jpg"),
-        require("../assets/IMGS/IMG_1327.jpg"),
-        require("../assets/IMGS/IMG_1328.jpg"),
-        require("../assets/IMGS/IMG_1329.jpg"),
-        require("../assets/IMGS/IMG_1330.jpg"),
-        require("../assets/IMGS/IMG_1331.jpg"),
-        require("../assets/IMGS/IMG_1332.jpg"),
-        require("../assets/IMGS/IMG_1333.jpg"),
-        require("../assets/IMGS/IMG_1334.jpg"),
-        require("../assets/IMGS/IMG_1335.jpg"),
-        require("../assets/IMGS/IMG_1336.jpg"),
-        require("../assets/IMGS/IMG_1337.jpg"),
-        require("../assets/IMGS/IMG_1338.jpg"),
-        require("../assets/IMGS/IMG_1339.jpg"),
-        require("../assets/IMGS/IMG_1340.jpg")
-      ]
+      maxh: 0
     };
   },
   watch: {
     //监听属性值变化
     fullWidth(val) {
       // console.log(val, this.waterfallImgWidth);
+    },
+    waterfallData(val) {
+      // this.maxh = Math.max.apply(null, this.waterfallDeviationHeight);
+      // console.log(this.maxh);
     }
   },
   created() {
-    for (let i = 0; i < 100; i++) {
-      let a = Math.round(Math.random() * 31);
-      this.imgList.push(this.imgArr[a]);
-    }
+    console.log(this.waterfallData);
+    // for (let i = 0; i < 30; i++) {
+    //   let a = Math.round(Math.random() * 31);
+    //   this.imgList.push(this.imgArr[a]);
+    // }
     // console.log(this.imgList);
     //监听屏幕大小变化
     window.addEventListener("resize", this.handleResize);
@@ -106,6 +81,10 @@ export default {
     window.removeEventListener("resize", this.handleResize);
   },
   methods: {
+    fn() {
+      this.$emit("my-event", this.maxh);
+    },
+    //监听国通条
     handleScroll(event) {
       console.log(
         document.documentElement.scrollTop,
@@ -154,18 +133,22 @@ export default {
     // },
     //图片预加载，获取图片宽度，高度
     imgPreloading() {
-      this.imgList.forEach((item, index) => {
+      this.waterfallData.forEach((item, index) => {
+        console.log(item);
         let aImg = new Image();
-        aImg.src = this.imgList[index];
+        aImg.src = item.e_img;
         aImg.onload = aImg.imgArr = e => {
           let imgData = {};
           imgData.height = Math.ceil(
             (this.waterfallImgWidth / aImg.width) * aImg.height
           );
           // console.log(this.waterfallImgWidth, aImg.width, aImg.height);
-          imgData.src = this.imgList[index];
+          imgData.src = item.e_img;
+
+          Object.assign(imgData, item);
           this.waterfallList.push(imgData);
-          // console.log(imgData);
+
+          console.log(imgData);
           this.rankImg(imgData);
         };
       });
@@ -194,12 +177,15 @@ export default {
      */
     filterMin() {
       //找到最小那个数的值
+      this.maxh = Math.max.apply(null, this.waterfallDeviationHeight);
       const min = Math.min.apply(null, this.waterfallDeviationHeight);
-      // console.log(min);
+      console.log(min);
       return this.waterfallDeviationHeight.indexOf(min);
     }
+  },
+  props: {
+    waterfallData: Array
   }
-  // props: ["waterfallData"]
 };
 </script>
 <style lang="scss" scoped>

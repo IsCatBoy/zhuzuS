@@ -10,11 +10,10 @@
 export default {
   name: "MineHead",
   data() {
-    return {
-    };
+    return {};
   },
-  props:{
-    imgUrl:String
+  props: {
+    imgUrl: String
   }
 };
 </script>

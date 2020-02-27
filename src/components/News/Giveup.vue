@@ -23,7 +23,7 @@ export default {
     return {};
   },
   props: {
-    itemdata: Array
+    itemdata: Object
   }
 };
 </script>
