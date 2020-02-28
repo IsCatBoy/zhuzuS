@@ -7,7 +7,7 @@
 
       <div class="shareComment">{{ shareComment }}</div>
       <div class="shareAll">
-        <div class="shareInfo">
+        <div class="shareInfo" @click="BtnFocus">
           <div class="userPhoto">
             <img :src="userPhoto" alt v-lazy="userPhoto" />
           </div>
@@ -41,6 +41,9 @@ export default {
   methods: {
     sharePicBtn() {
       this.$router.push("/enjoy");
+    },
+    BtnFocus() {
+      this.$router.push("/focus");
     }
   }
 };

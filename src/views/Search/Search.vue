@@ -1,32 +1,35 @@
 <template>
   <div class="page Search">
-    <div class="SearchTop">
-      <div class="sign">
-        <div class="signIcon" @click="qiehuan(1)">
-          <div :class="{ signLine: num == 1 ? true:false}">推荐</div>
+    <div class="SearchHead">
+      <div class="SearchTop">
+        <!-- 导航切换 -->
+        <div class="sign">
+          <div class="signIcon" @click="qiehuan(1)">
+            <div :class="{ signLine: num == 1 ? true:false}">推荐</div>
+          </div>
+          <div class="signIcon" @click="qiehuan(2)">
+            <div :class="{ signLine: num == 2 ? true:false}">穿搭</div>
+          </div>
+          <div class="signIcon" @click="qiehuan(3)">
+            <div :class="{ signLine: num == 3 ? true:false}">彩妆</div>
+          </div>
+          <div class="signIcon" @click="qiehuan(4)">
+            <div :class="{ signLine: num == 4 ? true:false}">美甲</div>
+          </div>
+          <div class="signIcon" @click="qiehuan(5)">
+            <div :class="{ signLine: num == 5 ? true:false}">旅行</div>
+          </div>
+          <div class="signIcon" @click="qiehuan(6)">
+            <div :class="{ signLine: num == 6 ? true:false}">摄影</div>
+          </div>
+          <div class="signIcon" @click="qiehuan(7)">
+            <div :class="{ signLine: num == 7 ? true:false}">美食</div>
+          </div>
         </div>
-        <div class="signIcon" @click="qiehuan(2)">
-          <div :class="{ signLine: num == 2 ? true:false}">穿搭</div>
-        </div>
-        <div class="signIcon" @click="qiehuan(3)">
-          <div :class="{ signLine: num == 3 ? true:false}">彩妆</div>
-        </div>
-        <div class="signIcon" @click="qiehuan(4)">
-          <div :class="{ signLine: num == 4 ? true:false}">美甲</div>
-        </div>
-        <div class="signIcon" @click="qiehuan(5)">
-          <div :class="{ signLine: num == 5 ? true:false}">旅行</div>
-        </div>
-        <div class="signIcon" @click="qiehuan(6)">
-          <div :class="{ signLine: num == 6 ? true:false}">摄影</div>
-        </div>
-        <div class="signIcon" @click="qiehuan(7)">
-          <div :class="{ signLine: num == 7 ? true:false}">美食</div>
-        </div>
-      </div>
 
-      <!-- search -->
-      <van-search v-model="value" shape="round" placeholder="请输入搜索关键词" />
+        <!-- search -->
+        <van-search v-model="value" shape="round" placeholder="请输入搜索关键词" />
+      </div>
     </div>
 
     <section class="shareSet">
@@ -138,21 +141,24 @@ export default {
 <style lang="scss" scoped>
 .page {
   height: calc(100% - 49px);
-  .SearchTop {
-    width: 100%;
-    position: fixed;
-    background-color: white;
-    .sign {
-      display: flex;
-      justify-content: space-around;
-      font-size: 0.937em;
-      color: #434343;
-      font-weight: 600;
-      margin: 0.335rem 0 0.11rem;
-      .signLine {
-        border-bottom: 2px solid #6fa7dd;
-        font-size: 1.125em;
-        padding-bottom: 0.02rem;
+  .SearchHead {
+    height: 127.1px;
+    .SearchTop {
+      width: 100%;
+      position: fixed;
+      background-color: white;
+      .sign {
+        display: flex;
+        justify-content: space-around;
+        font-size: 0.937em;
+        color: #434343;
+        font-weight: 600;
+        margin: 0.335rem 0 0.11rem;
+        .signLine {
+          border-bottom: 2px solid #6fa7dd;
+          font-size: 1.125em;
+          padding-bottom: 0.02rem;
+        }
       }
     }
   }
