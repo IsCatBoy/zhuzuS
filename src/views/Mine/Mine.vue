@@ -1,5 +1,6 @@
 <template>
   <div class="page mine">
+    <!-- 头部资料 -->
     <div class="mineTop">
       <MineHead :imgUrl="imgUrl"></MineHead>
       <MineMain v-for="(item, index) in dataMain" :key="index" :itemMain="item"></MineMain>
@@ -17,16 +18,27 @@
           <div :class="{ signLine: num == 3 ? true:false}"></div>
         </div>
       </div>
-      <!-- 二维码，设置 -->
-      <div class="QRSet">
-        <div @click="BtnFocus" class="QRcode">
-          <img src="../../assets/minePage/QRcode@3x.png" alt />
-        </div>
-        <div @click="BtnSet" class="mySet">
-          <img src="../../assets/minePage/Setup@3x.png" alt />
-        </div>
+
+      
+        <Popup class="twoMa" v-model="show">
+          <vue-qr :logoSrc="dataMain[0].headPortrait" :text="dataMain[0].nickname" :size="200"></vue-qr>
+          </Popup>
+        
+     
+    </div>
+<!-- zujian -->
+<!-- <Cell is-link @click="showPopup">展示弹出层</Cell>
+<Popup v-model="show">内容</Popup> -->
+    <!-- 二维码，设置 -->
+    <div class="QRSet">
+      <div @click="showPopup" class="QRcode">
+        <img src="../../assets/minePage/QRcode@3x.png" alt />
+      </div>
+      <div @click="BtnSet" class="mySet">
+        <img src="../../assets/minePage/Setup@3x.png" alt />
       </div>
     </div>
+
 
     <section class="shareSet">
       <MineShare
@@ -49,11 +61,15 @@
 import MineHead from "./MineChind.vue/MineHead.vue";
 import MineMain from "./MineChind.vue/MineMain.vue";
 import MineShare from "./MineChind.vue/MineShare.vue";
+import vueQr from "vue-qr";
+import { Popup} from "vant";
 
 export default {
   name: "Mine",
   data() {
     return {
+      show: false,
+      // two: false,
       num: 1,
       data: [
         {
@@ -108,7 +124,9 @@ export default {
   components: {
     MineHead,
     MineMain,
-    MineShare
+    MineShare,
+    vueQr,
+    Popup,
   },
   methods: {
     //切换
@@ -120,15 +138,17 @@ export default {
       console.log("set");
       this.$router.push("/set");
     },
-    BtnFocus() {
-      this.$router.push("/focus");
-    }
+
+    // twoMaBtn() {
+    //   this.two = !this.two;
     // },
-    // qiehuan(nums) {
-    //   this.num = nums;
-    // }
+    // erwei() {
+    //   this.two = false;
+    // },
+    showPopup() {
+      this.show = true;
   }
-};
+}}
 </script>
 
 <style lang="scss" scoped>
@@ -153,26 +173,12 @@ export default {
         background-color: #6fa7dd;
       }
     }
-    .QRSet {
+
+    .twoMa {
       position: absolute;
-      z-index: 2;
-      right: 0.17rem;
-      top: 0.325rem;
-      .QRcode {
-        width: 0.15rem;
-        display: inline-block;
-        margin-right: 0.14rem;
-        img {
-          width: 100%;
-        }
-      }
-      .mySet {
-        display: inline-block;
-        width: 0.165rem;
-        img {
-          width: 100%;
-        }
-      }
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
@@ -182,6 +188,27 @@ export default {
     flex-wrap: wrap;
     .shareCom {
       width: 50%;
+    }
+  }
+  .QRSet {
+    position: absolute;
+    z-index: 2;
+    right: 0.17rem;
+    top: 0.325rem;
+    .QRcode {
+      width: 0.15rem;
+      display: inline-block;
+      margin-right: 0.14rem;
+      img {
+        width: 100%;
+      }
+    }
+    .mySet {
+      display: inline-block;
+      width: 0.165rem;
+      img {
+        width: 100%;
+      }
     }
   }
 }

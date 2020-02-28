@@ -1,19 +1,14 @@
 <template>
   <div class="mineshare">
     <div class="share">
-<<<<<<< HEAD
       <div class="sharePic" @click="sharePicBtn">
-        <img :src="shareImg" alt />
-=======
-      <div class="sharePic">
-        <img :src="shareImg" alt v-lazy="shareImg" />
->>>>>>> 2b26dfd1d116aafc2816cc7322cdee13710bb54c
+        <img :src="shareImg" alt="" v-lazy="shareImg" />
       </div>
 
       <div class="shareComment">{{ shareComment }}</div>
       <div class="shareAll">
-        <div class="shareInfo">
-          <div class="userPhoto">
+        <div class="shareInfo" @click="BtnFocus" >
+          <div class="userPhoto" >
             <img :src="userPhoto" alt v-lazy="userPhoto" />
           </div>
           <div class="userName">{{ userName }}</div>
@@ -46,6 +41,9 @@ export default {
   methods:{
     sharePicBtn (){
       this.$router.push('/enjoy')
+    },
+     BtnFocus() {
+      this.$router.push("/focus");
     }
   }
 };

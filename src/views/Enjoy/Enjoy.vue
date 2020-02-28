@@ -6,7 +6,7 @@
     <div class="enjoyMid" @click="enjoyMidBtn">
       <img :src="enjoyMid" alt />
     </div>
-    <div class="enjoyBottom">
+    <div class="enjoyBottom" v-show="top">
       <div class="footer">
         <div class="item">
           <img src="../../assets/indexPage/likes@3x.png" alt />
@@ -70,6 +70,7 @@ export default {
   methods: {
     enjoyMidBtn() {
       console.log("我是冷太阳");
+      this.top = !this.top;
     }
   }
 };
@@ -80,33 +81,49 @@ export default {
   .enjoyTop {
     width: 100%;
     height: 32px;
-    background: rgb(128, 128, 125);
-    // filter: blur(2px);
-    opacity: .9;
+    // background: rgb(128, 128, 125);
     position: absolute;
+    z-index: 1;
+    top: 0;
+    &::before {
+      width: 100%;
+      height: 32px;
+      content: "";
+      z-index: -1;
+      position: absolute;
+      top: 0;
+      filter: blur(4px);
+      background: url("../../assets/loginPage/bannerlogin@3x.png") 0 / cover;
+    }
     img {
       transform: rotate(90deg);
       position: absolute;
       line-height: 32px;
       right: 20px;
-
     }
   }
   .enjoyMid {
     height: 100%;
     img {
-      width: 100%;
+    height: 100%;
     }
   }
   .enjoyBottom {
     width: 100%;
     min-height: 260px;
     position: absolute;
-     background: rgb(128, 128, 125);
-    // filter: blur(2px);
-    opacity: .9;
     bottom: 0;
-
+    z-index: 1;
+    &::before {
+      width: 100%;
+      min-height: 260px;
+      content: "";
+      z-index: -1;
+      position: absolute;
+      bottom: 0;
+      filter: blur(4px);
+      background: url("../../assets/loginPage/bannerlogin@3x.png") 0 / cover;
+    }
     .footer {
       display: flex;
       align-items: center;
