@@ -4,8 +4,7 @@
       <!-- 更换头像 -->
       <van-field name="uploader" label="更换头像">
         <template #input>
-          <van-uploader v-model="uploader" 
-          :rules="[]"/>
+          <van-uploader v-model="uploader" :rules="[]" :max-count="1" preview-size="110" />
         </template>
       </van-field>
       <!-- 修改用户名 -->
@@ -135,6 +134,6 @@ export default {
 
 <style lang="scss" scoped>
 .page {
-  height: calc(100% - 49px);
+  height: calc(100% - 64px);
 }
 </style>

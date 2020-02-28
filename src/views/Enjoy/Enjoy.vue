@@ -1,6 +1,7 @@
 <template>
   <div class="page enjoy">
     <div class="enjoyTop" v-show="top">
+      <van-icon size="0.24rem" name="arrow-left" @click="$router.go(-1)" />
       <img src="../../assets/indexPage/moer@3x.png" alt />
     </div>
     <div class="enjoyMid" @click="enjoyMidBtn">
@@ -78,18 +79,23 @@ export default {
 .page {
   height: 100%;
   .enjoyTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    height: 32px;
+    height: 40px;
     background: rgb(128, 128, 125);
     // filter: blur(2px);
-    opacity: .9;
+    opacity: 0.9;
     position: absolute;
+    &:nth-child(1) {
+      padding: 0 0.07rem;
+    }
     img {
       transform: rotate(90deg);
       position: absolute;
       line-height: 32px;
       right: 20px;
-
     }
   }
   .enjoyMid {
@@ -102,9 +108,9 @@ export default {
     width: 100%;
     min-height: 260px;
     position: absolute;
-     background: rgb(128, 128, 125);
+    background: rgb(128, 128, 125);
     // filter: blur(2px);
-    opacity: .9;
+    opacity: 0.9;
     bottom: 0;
 
     .footer {

@@ -66,4 +66,13 @@ html,
     text-decoration: none;
   }
 }
+.van-uploader__wrapper {
+  flex-wrap: nowrap !important;
+}
+// .van-uploader__upload {
+//   width: 110px !important;
+// }
+// .van-uploader__input {
+//   width: 110px !important;
+// }
 </style>

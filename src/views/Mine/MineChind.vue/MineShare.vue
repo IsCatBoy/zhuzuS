@@ -1,13 +1,8 @@
 <template>
   <div class="mineshare">
     <div class="share">
-<<<<<<< HEAD
       <div class="sharePic" @click="sharePicBtn">
-        <img :src="shareImg" alt />
-=======
-      <div class="sharePic">
         <img :src="shareImg" alt v-lazy="shareImg" />
->>>>>>> 2b26dfd1d116aafc2816cc7322cdee13710bb54c
       </div>
 
       <div class="shareComment">{{ shareComment }}</div>
@@ -43,9 +38,9 @@ export default {
     good: Number,
     like: String
   },
-  methods:{
-    sharePicBtn (){
-      this.$router.push('/enjoy')
+  methods: {
+    sharePicBtn() {
+      this.$router.push("/enjoy");
     }
   }
 };

@@ -15,6 +15,7 @@ Vue.use(Lazyload, {
 Vue.use(Vant);
 
 Vue.config.productionTip = false;
+Vue.prototype.$axios = Axios;
 
 new Vue({
   router,
