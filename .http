@@ -1,0 +1,11 @@
+POST http://175.24.82.120:8888/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"15282235022",
+    "password":"Qq123456!"
+}
+###
+POST http://175.24.82.120:8888/auth HTTP/1.1
+Content-Type: application/json
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImE1NDgwMWJiZjBkNDQ4Zjc5YTc4ZmIyMmQ2ODE4YWUzYmVkZWM0MzQiLCJwYXNzd29yZCI6ImQ4Y2ZmNmU1OWJhMjAwYzczNjAxNDlmNDhiOTY4ZDZhNTdmZWJkMTIiLCJpYXQiOjE1ODI5NjAwMDksImV4cCI6MTU4Mjk2MDAyOX0.7HIGFfA9ihThpEAuZrnLA1GTTch4bUXuQ-ynhdQRdvg

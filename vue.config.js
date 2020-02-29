@@ -10,9 +10,28 @@ module.exports = {
           "^/api": ""
         }
       },
-      "/foo": {
-        target: "<other_url>"
+      "/fuwu": {
+        target: "http://175.24.82.120:8888",
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          "^/fuwu": "/"
+        }
       }
     }
+    // port: 8080,
+    // host: "0.0.0.0",
+    // autoOpenBrowser: false,
+    // assetsSubDirectory: "static",
+    // assetsPublicPath: "/",
+    // proxy: {
+    //   "/apis": {
+    //     target: "http://175.24.82.120:8888",
+    //     ws: true,
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       "^/apis": "/"
+    //     }
+    //   }
   }
 };

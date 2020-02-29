@@ -49,6 +49,7 @@
 <script>
 import Axios from "axios";
 import { Toast } from "mint-ui";
+import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   name: "login",
   data() {
@@ -59,11 +60,18 @@ export default {
       password: ""
     };
   },
-  created() {},
+  computed: {
+    ...mapState(["UserInfoData"])
+  },
+  created() {
+    console.log(this.UserInfoData);
+  },
   methods: {
+    ...mapActions(["action_userinfo"]),
+
     Login() {
       let vm = this;
-      const url = "http://175.24.82.120:8888/login";
+      const url = "/fuwu/login";
       Axios.post(url, {
         username: this.username,
         password: this.password
@@ -78,6 +86,9 @@ export default {
             console.log(res.data.err);
             vm.isShow = true;
           } else {
+            console.log(res.data.data);
+            this.action_userinfo(res.data.data);
+            localStorage.setItem("userToken", res.data.token);
             vm.$router.push("/");
           }
           console.log(res);

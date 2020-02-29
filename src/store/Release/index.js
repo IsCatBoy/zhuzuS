@@ -21,8 +21,6 @@ export default {
     },
     mutations: {
         [MUTAT_NEWSFILELIST](state, payload) {
-            
-            console.log(payload);
             state.NewsfileList = payload;
         },
         [MUTAT_NEWSTITLE](state, payload) {
@@ -46,11 +44,11 @@ export default {
     },
     actions: {
         // {commit, state, getters} = context;
-        //修改标题
+        
         action_NewsfileList(context, payload) {
-
             context.commit(MUTAT_NEWSFILELIST, payload);
         },
+        //修改标题
         action_NewsTitle(context, payload) {
             context.commit(MUTAT_NEWSTITLE, payload);
         },

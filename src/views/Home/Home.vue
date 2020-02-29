@@ -19,31 +19,47 @@
 // @ is an alias to /src
 import Moreitem from "../../components/Home/moreitem";
 import Dynamic from "../../components/Home/dynamic";
+import { mapState } from "vuex";
+import { Dialog } from "vant";
+
 export default {
   name: "Home",
   components: {
     Moreitem,
     Dynamic
+  },
+  computed: {
+    ...mapState(["UserInfoData"])
+  },
+  created() {
+    console.log(this.UserInfoData);
+    let token = localStorage.getItem("userToken");
+    console.log(token);
+    // let url = "/auth";
+    if (!token) {
+      this.$router.push("/login");
+    } else {
+      this.$axios.defaults.headers.common["authorization"] = token;
+      this.$axios({
+        method: "POST",
+        url: "/fuwu/auth"
+      })
+        .then(res => {
+          console.log(res);
+          if (res.data.code === 409) {
+            Dialog.alert({
+              title: "小足提醒",
+              message: "身份验证失效，请重新登录"
+            }).then(() => {
+              this.$router.push("/login");
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
-  // created() {
-  //   this.Login();
-  // },
-  // methods: {
-  //   Login() {
-  //     const url = "http://175.24.82.120:8888/login";
-  //     this.$axios
-  //       .post(url, {
-  //         username: "admin",
-  //         password: "qq123456"
-  //       })
-  //       .then(res => {
-  //         console.log(res);
-  //       })
-  //       .catch(error => {
-  //         console.log(error);
-  //       });
-  //   }
-  // }
 };
 </script>
 

@@ -109,6 +109,7 @@ export default {
       // setTimeout 仅做示例，真实场景中一般为 ajax 请求
       let url = `/api/suggestion?key=d84d6d83e0e51e481e50454ccbe8986b&boundary=region(${this.region})&keyword=${a}&page_size=20&page_index=${this.pageindex}`;
       this.$axios.get(url).then(data => {
+        console.log(data);
         that.pageconut = data.data.count;
         console.log(data.data.data);
         that.list = data.data.data;

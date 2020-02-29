@@ -1,0 +1,23 @@
+//初始化用户信息
+const MUTAT_USERINFO = "MUTAT_USERINFO";
+//修改昵称
+const MUTAT_NICKNAME = "MUTAT_NICKNAME";
+//修改描述
+const MUTAT_REMARK = "MUTAT_REMARK";
+//修改性别
+const MUTAT_SEX = "MUTAT_SEX";
+//修改生日
+const MUTAT_BIRTHDAY = "MUTAT_BIRTHDAY";
+//修改头像
+const MUTAT_PROFILE = "MUTAT_PROFILE";
+//修改地区
+const MUTAT_REGION = "MUTAT_REGION";
+module.exports = {
+  MUTAT_USERINFO,
+  MUTAT_NICKNAME,
+  MUTAT_REMARK,
+  MUTAT_SEX,
+  MUTAT_BIRTHDAY,
+  MUTAT_PROFILE,
+  MUTAT_REGION
+};

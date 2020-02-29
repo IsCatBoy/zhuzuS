@@ -2,12 +2,12 @@
   <div class="page Release">
     <div class="fliesdiv">
       <van-uploader
-        v-model="$store.state.ReleaseData.NewsfileList"
+        v-model="fileList"
         multiple
         :max-count="5"
         preview-size="110"
-        :after-read="afterread"
       />
+      <!-- :after-read="afterread" -->
     </div>
     <div class="fontben">
       <div class="title">
@@ -69,15 +69,18 @@ export default {
     return {
       // title1: "添加主题",
       // title2: "你的位置",
-      region: "成都市"
+      region: "成都市",
       // checkeds: this.$store.state.ReleaseData.NewsSynBtn,
       // checkedt: this.$store.state.ReleaseData.NewsSaveBtn,
-      // fileList: this.$store.state.ReleaseData.NewsfileList
+      fileList: this.$store.state.ReleaseData.NewsfileList
     };
   },
   watch: {
     fileList(val) {
       console.log(val);
+      this.action_NewsfileList(val);
+      // console.log(this.fileList);
+      console.log(this.ReleaseData);
     }
   },
   //导航首位
@@ -109,12 +112,13 @@ export default {
     ...mapActions(["action_NewsTitle"]),
     ...mapActions(["action_NewsSynBtn"]),
     ...mapActions(["action_NewsSaveBtn"]),
-    //图片上传
-    afterread(file, detail) {
-      this.action_NewsfileList(file);
-      console.log(file, detail);
-      console.log(this.ReleaseData.NewsfileList);
-    },
+    // 图片上传
+    // afterread(file, detail) {
+    //   let a=[...file];
+    //   this.action_NewsfileList(a);
+    //   console.log(a, detail);
+    //   console.log(this.ReleaseData);
+    // },
     //切换开关状态
     // onInput(a) {
     //   console.log(a);
