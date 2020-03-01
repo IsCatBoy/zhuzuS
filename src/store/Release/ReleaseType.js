@@ -12,6 +12,10 @@ const MUTAT_NewsPosition = "MUTAT_NewsPosition";
 const MUTAT_NewsSynBtn = "MUTAT_NewsSynBtn";
 //修改保存
 const MUTAT_NewsSaveBtn = "MUTAT_NewsSaveBtn";
+//发布类型
+const MUTAT_NewsArticletype = "MUTAT_NewsArticletype";
+//是否上推荐
+const MUTAT_NewsKeyflag = "MUTAT_NewsKeyflag";
 module.exports = {
   MUTAT_NEWSFILELIST,
   MUTAT_NEWSTITLE,
@@ -19,5 +23,7 @@ module.exports = {
   MUTAT_NewsTheme,
   MUTAT_NewsPosition,
   MUTAT_NewsSynBtn,
-  MUTAT_NewsSaveBtn
+  MUTAT_NewsSaveBtn,
+  MUTAT_NewsArticletype,
+  MUTAT_NewsKeyflag
 };
