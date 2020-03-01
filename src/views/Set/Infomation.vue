@@ -79,9 +79,10 @@
 <script>
 import { Field } from "mint-ui";
 import { Radio } from "mint-ui";
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 import { Toast } from "vant";
 import { Dialog } from "vant";
+
 export default {
   components: { Field },
   name: "Infomation",
@@ -166,6 +167,7 @@ export default {
     });
   },
   methods: {
+    ...mapActions(["action_userinfo"]),
     onSubmit(values) {
       let that = this;
       let data = new FormData();
@@ -200,6 +202,12 @@ export default {
             })
             .then(res => {
               if (res.data.code == 200) {
+                console.log(res.data.data);
+                localStorage.setItem("userInfo", JSON.stringify(res.data.data));
+                that.action_userinfo(
+                  JSON.parse(localStorage.getItem("userInfo"))
+                );
+
                 Toast.success("上传成功");
               } else {
                 Toast.fail("上传失败");

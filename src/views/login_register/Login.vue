@@ -86,15 +86,18 @@ export default {
             console.log(res.data.err);
             vm.isShow = true;
           } else {
-            console.log(res.data.data);
-            this.action_userinfo(res.data.data);
+            // console.log(res.data.data);
+            // this.action_userinfo(res.data.data);
             localStorage.setItem("userToken", res.data.token);
+            localStorage.setItem("userInfo", JSON.stringify(res.data.data));
+            console.log(res.data.data);
+            this.action_userinfo(JSON.parse(localStorage.getItem("userInfo")));
             vm.$router.push("/");
           }
           console.log(res);
         })
         .catch(error => {
-          console.log(reeor);
+          console.log(error);
         });
     },
     //同意按钮变色
