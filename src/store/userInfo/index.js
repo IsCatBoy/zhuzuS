@@ -85,5 +85,13 @@ export default {
       context.commit(MUTAT_REGION, payload);
     }
   },
-  getters: {}
+  getters: {
+    birthdays: state => {
+      console.log(state.birthday);
+      let bir = new Date(state.birthday);
+      return state.birthday == null
+        ? null
+        : `${bir.getFullYear()}-${bir.getMonth() + 1}-${bir.getDate()}`;
+    }
+  }
 };
