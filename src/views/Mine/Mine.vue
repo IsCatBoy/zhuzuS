@@ -18,7 +18,6 @@
           <div :class="{ signLine: num == 3 ? true:false}"></div>
         </div>
       </div>
-
       
         <Popup class="twoMa" v-model="show">
           <vue-qr :logoSrc="dataMain[0].headPortrait" :text="dataMain[0].nickname" :size="200"></vue-qr>
@@ -109,12 +108,12 @@ export default {
 
       dataMain: [
         {
-          headPortrait: require("../../assets/minePage/Headportrait@3x.png"),
-          nickname: "Mondoli",
-          gender: require("../../assets/minePage/Gender@3x.png"),
-          userId: 6926392032,
+          headPortrait: this.$store.state.UserInfoData.profile,
+          nickname: this.$store.state.UserInfoData.nickname,
+          gender: this.$store.state.UserInfoData.sex,
+          userId: this.$store.state.UserInfoData.user_id,
           address: require("../../assets/minePage/address@3x.png"),
-          cityName: "成都",
+          cityName:this.$store.state.UserInfoData.region_id,
           attention: 5,
           myFans: 1928
         }
