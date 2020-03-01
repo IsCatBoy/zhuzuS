@@ -3,30 +3,36 @@
     <!-- 头部资料 -->
     <div class="mineTop">
       <MineHead :imgUrl="imgUrl"></MineHead>
-      <MineMain v-for="(item, index) in dataMain" :key="index" :itemMain="item"></MineMain>
+      <MineMain
+        v-for="(item, index) in dataMain"
+        :key="index"
+        :itemMain="item"
+      ></MineMain>
       <div class="sign">
         <div class="signIcon" @click="qiehuan(1)">
           <img src="../../assets/minePage/Collection@3x.png" alt />
-          <div :class="{ signLine: num == 1 ? true:false}"></div>
+          <div :class="{ signLine: num == 1 ? true : false }"></div>
         </div>
         <div class="signIcon" @click="qiehuan(2)">
           <img src="../../assets/minePage/lovestar@3x.png" alt />
-          <div :class="{ signLine: num == 2 ? true:false}"></div>
+          <div :class="{ signLine: num == 2 ? true : false }"></div>
         </div>
         <div class="signIcon" @click="qiehuan(3)">
           <img src="../../assets/minePage/AIT@3x.png" alt />
-          <div :class="{ signLine: num == 3 ? true:false}"></div>
+          <div :class="{ signLine: num == 3 ? true : false }"></div>
         </div>
       </div>
-      
-        <Popup class="twoMa" v-model="show">
-          <vue-qr :logoSrc="dataMain[0].headPortrait" :text="dataMain[0].nickname" :size="200"></vue-qr>
-          </Popup>
-        
-     
+
+      <Popup class="twoMa" v-model="show">
+        <vue-qr
+          :logoSrc="dataMain[0].headPortrait"
+          :text="dataMain[0].nickname"
+          :size="200"
+        ></vue-qr>
+      </Popup>
     </div>
-<!-- zujian -->
-<!-- <Cell is-link @click="showPopup">展示弹出层</Cell>
+    <!-- zujian -->
+    <!-- <Cell is-link @click="showPopup">展示弹出层</Cell>
 <Popup v-model="show">内容</Popup> -->
     <!-- 二维码，设置 -->
     <div class="QRSet">
@@ -37,7 +43,6 @@
         <img src="../../assets/minePage/Setup@3x.png" alt />
       </div>
     </div>
-
 
     <section class="shareSet">
       <MineShare
@@ -61,7 +66,7 @@ import MineHead from "./MineChind.vue/MineHead.vue";
 import MineMain from "./MineChind.vue/MineMain.vue";
 import MineShare from "./MineChind.vue/MineShare.vue";
 import vueQr from "vue-qr";
-import { Popup} from "vant";
+import { Popup } from "vant";
 
 export default {
   name: "Mine",
@@ -125,7 +130,7 @@ export default {
     MineMain,
     MineShare,
     vueQr,
-    Popup,
+    Popup
   },
   methods: {
     //切换
@@ -146,8 +151,9 @@ export default {
     // },
     showPopup() {
       this.show = true;
+    }
   }
-}}
+};
 </script>
 
 <style lang="scss" scoped>
