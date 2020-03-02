@@ -9,6 +9,8 @@
 import "normalize.css/normalize.css";
 import LWHeader from "./components/header";
 import LWFooter from "./components/footer";
+import { mapState, mapActions, mapGetters } from "vuex";
+
 export default {
   name: "App",
   data() {
@@ -18,7 +20,11 @@ export default {
     LWHeader,
     LWFooter
   },
+  created() {
+    this.action_userinfo(JSON.parse(localStorage.getItem("userInfo")));
+  },
   methods: {
+    ...mapActions(["action_userinfo"]),
     goto(id) {
       this.$router.push(id);
     }

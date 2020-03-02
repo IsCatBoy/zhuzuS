@@ -2,23 +2,18 @@
   <div class="page infomation">
     <van-form>
       <!-- 更换头像 -->
-      <van-field name="uploader" label="更换头像">
+      <van-field name="profile" label="更换头像">
         <template #input>
-          <van-uploader v-model="uploader" :rules="[]" :max-count="1" preview-size="110" />
+          <van-uploader v-model="profile" :rules="[]" :max-count="1" preview-size="110" />
         </template>
       </van-field>
       <!-- 修改用户名 -->
-      <van-field
-        v-model="username"
-        name="username"
-        label="用户名"
-        placeholder="用户名"
-        :rules="[{ required: true, message: '请填写用户名' }]"
-      />
+      <van-field v-model="nickname" name="nickname" label="用户名" placeholder="用户名" />
+      <!-- :rules="[{ required: true, message: '请填写用户名' }]" -->
       <!-- 简介 -->
       <van-field
-        v-model="introduction"
-        name="introduction"
+        v-model="remark"
+        name="remark"
         label="简介"
         placeholder="介绍一下自己吧"
         :rules="[{ required: false, message: '请介绍自己' }]"
@@ -28,7 +23,7 @@
         readonly
         clickable
         name="picker"
-        :value="value_sex"
+        :value="sex"
         label="性别"
         placeholder="女"
         @click="showPicker_sex = true"
@@ -47,7 +42,7 @@
         readonly
         clickable
         name="calendar"
-        :value="value_brithday"
+        :value="birthday"
         label="生日"
         placeholder="点击选择日期"
         @click="showCalendar_brithday = true"
@@ -59,7 +54,7 @@
         readonly
         clickable
         name="picker"
-        :value="value_city"
+        :value="region_name"
         label="城市"
         placeholder="成都"
         @click="showPicker_city = true"
@@ -84,89 +79,209 @@
 <script>
 import { Field } from "mint-ui";
 import { Radio } from "mint-ui";
-import { mapState } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
+import { Toast } from "vant";
+import { Dialog } from "vant";
+
 export default {
   components: { Field },
   name: "Infomation",
   data() {
     return {
+      istui: true,
       // postImgApi: "/fuwu/updata",
       // 简介
-      introduction: this.$store.state.UserInfoData.remark,
+      remark: this.$store.state.UserInfoData.remark,
       // 昵称
-      username: this.$store.state.UserInfoData.nickname,
+      nickname: this.$store.state.UserInfoData.nickname,
       //头像地址
-      uploader: [{ url: this.$store.state.UserInfoData.profile }],
+      profile: [
+        {
+          url:
+            this.$store.state.UserInfoData.profile === null
+              ? `http://175.24.82.120:8888/touxiang/IMG_1319.jpg`
+              : this.$store.state.UserInfoData.profile
+        }
+      ],
       //性别
-      value_sex: this.$store.state.UserInfoData.sex,
+      sex:
+        this.$store.state.UserInfoData.sex === 1
+          ? "男"
+          : this.$store.state.UserInfoData.sex === 2
+          ? "女"
+          : "",
       sex_list: ["男", "女"],
       showPicker_sex: false,
       //生日
       showCalendar_brithday: false,
-      value_brithday: this.$store.state.UserInfoData.birthday,
+      birthday: null,
       //城市
       showPicker_city: false,
-      value_city: this.$store.state.UserInfoData.region_id,
-      city_list: ["成都", "重庆", "武汉", "长沙", "深圳", "北京", "石家庄"]
+      region_name: null,
+      region_id: this.$store.state.UserInfoData.region_id,
+      city_list: null,
+      city_lists: null
     };
   },
+  watch: {
+    profile(val) {
+      console.log(val);
+      this.istui = true;
+      // if (val.length == 0) {
+      //   this.profile = [
+      //     { url: `http://175.24.82.120:8888/touxiang/IMG_1319.jpg` }
+      //   ];
+      // }
+    }
+  },
   computed: {
-    ...mapState(["UserInfoData"])
+    ...mapState(["UserInfoData"]),
+    ...mapGetters(["birthdays"])
   },
   created() {
-    console.log(this.UserInfoData);
+    this.birthday = this.birthdays;
+    // console.log(this.profile);
+    // console.log(this.UserInfoData);
+    let getcity = new Promise((res, req) => {
+      this.$axios.get("/fuwu/getregion").then(data => {
+        // console.log(data.data);
+        let act = data.data.data;
+        this.city_lists = act;
+        this.city_list = act.map((item, index) => {
+          // console.log(item.region_name);
+          return `${item.region_name}`;
+        });
+        res();
+      });
+    });
+    getcity.then(() => {
+      // console.log(this.city_list);
+      for (var itemcitys of this.city_lists) {
+        if (itemcitys.region_id == this.region_id) {
+          this.region_name = itemcitys.region_name;
+          break;
+        }
+      }
+      // console.log(this.region_name);
+      // console.log(this.region_id);
+    });
   },
   methods: {
+    ...mapActions(["action_userinfo"]),
     onSubmit(values) {
-      console.log(this.uploader);
+      let that = this;
       let data = new FormData();
-      if (this.uploader.length > 0) {
-        data.append("uploader", this.uploader[0].file); //图片
+      function pandaunnickname() {
+        if (
+          that.nickname === undefined ||
+          that.nickname === null ||
+          !that.nickname.trim()
+        ) {
+          Toast("用户名不得为空");
+        } else {
+          data.append("user_id", that.UserInfoData.user_id); //id;
+          data.append(
+            "sex",
+            that.sex === "男" ? 1 : that.sex === "女" ? 2 : null
+          ); //性别
+          data.append("remark", that.remark); //简介
+          data.append("nickname", that.nickname); //名称
+          data.append("region_id", that.region_id); //城市
+          data.append("birthday", that.birthday); //名称
+          let config = {
+            // "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
+            authorization: localStorage.getItem("userToken")
+          };
+          that
+            .$axios({
+              method: "POST",
+              url: "/fuwu/updata",
+              data: data,
+              headers: config
+            })
+            .then(res => {
+              if (res.data.code == 200) {
+                console.log(res.data.data);
+                localStorage.setItem("userInfo", JSON.stringify(res.data.data));
+                that.action_userinfo(
+                  JSON.parse(localStorage.getItem("userInfo"))
+                );
+
+                Toast.success("上传成功");
+              } else {
+                Toast.fail("上传失败");
+              }
+              console.log(res);
+            })
+            .catch(res => {
+              console.log(res);
+            });
+        }
       }
-      data.append("value_sex", this.value_sex === "男" ? 1 : 0); //性别
-      data.append("introduction", this.introduction); //手机号码
-      data.append("username", this.username); //名称
-      data.append("value_city", this.value_city); //名称
-      data.append("value_brithday", this.value_brithday); //名称
-      console.log(data.get("uploader"));
-      // this.$axios.defaults.headers.common[
-      //   "authorization"
-      // ] = localStorage.getItem("userToken");
-      // this.$axios.defaults.withCredentials = true;
-      let config = {
-        // "application/x-www-form-urlencoded"
-        "Content-Type": "application/x-www-form-urlencoded",
-        authorization: localStorage.getItem("userToken")
-      };
-      this.$axios({
-        method: "POST",
-        url: "/fuwu/updata",
-        data: data,
-        headers: config
-      })
-        .then(res => {
-          console.log(res);
+      function beforeClose(action, done) {
+        if (action === "confirm") {
+          // setTimeout(done, 1000);
+          that.istui = false;
+          done();
+        } else {
+          setTimeout(() => {
+            that.profile = [
+              { url: `http://175.24.82.120:8888/touxiang/IMG_1319.jpg` }
+            ];
+            that.istui = true;
+            done();
+          }, 1000);
+        }
+      }
+      if (this.profile.length <= 0) {
+        Dialog.confirm({
+          title: "没头像吗？",
+          message: "是否选用系统通奸头像",
+          confirmButtonText: "自己选",
+          cancelButtonText: "选择推荐",
+          beforeClose
         })
-        .catch(res => {
-          console.log(res);
-        });
-      // console.log("submit", values);
+          .then(data => {
+            console.log(data);
+          })
+          .catch(data => {
+            console.log(data);
+          });
+      }
+      if (that.profile.length > 0) {
+        if (that.profile[0].url) {
+          data.append("profile", that.profile[0].url);
+          console.log("tuijain" + that.profile);
+        } else {
+          data.append("profile", that.profile[0].file);
+          console.log("notuiamn" + that.profile);
+        } //图片
+        pandaunnickname();
+      }
     },
     // 性别设置
-    onConfirm_sex(value_sex) {
-      this.value_sex = value_sex;
+    onConfirm_sex(sex) {
+      this.sex = sex;
       this.showPicker_sex = false;
     },
     //生日
     onConfirm_brithday(date) {
-      this.value_brithday = `${date.getYear() + 1900}-${date.getMonth() +
+      this.birthday = `${date.getYear() + 1900}-${date.getMonth() +
         1}-${date.getDate()}`;
       this.showCalendar_brithday = false;
     },
     //城市
-    onConfirm_city(value_city) {
-      this.value_city = value_city;
+    onConfirm_city(region) {
+      for (var itemcitys of this.city_lists) {
+        if (itemcitys.region_name == region) {
+          this.region_id = itemcitys.region_id;
+          break;
+        }
+      }
+      this.region_name = region;
       this.showPicker_city = false;
+      // console.log(this.region_id);
     }
   }
 };

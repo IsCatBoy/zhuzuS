@@ -60,27 +60,43 @@ export default {
           active: "selmineicon",
           name: "登录",
           path: "/login"
-        },
+        }
       ]
     };
   },
   watch: {
     $route(route) {
       console.log(route);
-      if (
-        route.name === "Login" ||
-        route.name === "Chat" ||
-        route.name === "Set" ||
-        route.name === "Infomation" ||
-        route.name === "Common" ||
-        route.name === "Privacy" ||
-        route.name === "Focus" ||
-        route.name === "Enjoy"
-      ) {
+      let routes = [
+        "Login",
+        "Chat",
+        "Set",
+        "Infomation",
+        "Common",
+        "Privacy",
+        "Focus",
+        "Enjoy",
+        "Release"
+      ];
+      if (routes.includes(route.name)) {
         this.isshow = false;
       } else {
         this.isshow = true;
       }
+      // if (
+      //   route.name === "Login" ||
+      //   route.name === "Chat" ||
+      //   route.name === "Set" ||
+      //   route.name === "Infomation" ||
+      //   route.name === "Common" ||
+      //   route.name === "Privacy" ||
+      //   route.name === "Focus" ||
+      //   route.name === "Enjoy"
+      // ) {
+      //   this.isshow = false;
+      // } else {
+      //   this.isshow = true;
+      // }
     }
   },
   methods: {
