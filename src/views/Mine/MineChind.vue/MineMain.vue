@@ -123,11 +123,15 @@ export default {
   }
   .headPortrait {
     width: 0.635rem;
+    height: 0.635rem;
     position: relative;
     top: -0.41rem;
     margin-bottom: -0.305rem;
     img {
+      width: 0.635rem;
+      height: 0.635rem;
       width: 100%;
+      border-radius: 50%;
     }
   }
 }
