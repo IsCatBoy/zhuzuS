@@ -158,6 +158,7 @@ export default {
 
 <style lang="scss" scoped>
 .page {
+  overflow-x: hidden;
   height: calc(100% - 49px);
   .mineTop {
     position: relative;
