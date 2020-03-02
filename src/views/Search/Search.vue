@@ -33,7 +33,8 @@
     </div>
 
     <section class="shareSet">
-      <MineShare
+      <Cascadeflow :itemtype="num"></Cascadeflow>
+      <!-- <MineShare
         class="shareCom"
         v-for="(item, index) in data"
         :key="index"
@@ -43,14 +44,16 @@
         :userName="item.userName"
         :good="item.good"
         :like="item.like"
-      ></MineShare>
+      ></MineShare>-->
     </section>
   </div>
 </template>
 <script>
 // @ is an alias to /src
 import MineShare from "../Mine/MineChind.vue/MineShare.vue";
+import Cascadeflow from "../../components/Cascadeflow";
 import { Search } from "vant";
+import { mapActions } from "vuex";
 
 export default {
   name: "Search",
@@ -58,6 +61,7 @@ export default {
     return {
       value: "",
       num: 1,
+      like: require("../../assets/minePage/liked@3x.png"),
       data: [
         {
           shareImg: require("../../assets/minePage/191580582922_.pic@3x.png"),
@@ -123,15 +127,36 @@ export default {
           good: 520,
           like: require("../../assets/minePage/liked@3x.png")
         }
-      ]
+      ],
+      datas: null
     };
   },
+  computed: {
+    // datas() {
+    // }
+  },
+  created() {
+    // this.$axios
+    //   .get("/fuwu/getimgdata/getarticles", {
+    //     params: { type: 2 }
+    //   })
+    //   .then(res => {
+    //     this.datas = res.data.data;
+    //     this.action_ContentDataOne(res.data.data);
+    //     console.log(this.datas);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+  },
   methods: {
+    // ...mapActions(["action_ContentDataOne"]),
     qiehuan(nums) {
       this.num = nums;
     }
   },
   components: {
+    Cascadeflow,
     MineShare,
     "van-search": Search
   }

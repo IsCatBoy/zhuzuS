@@ -1,38 +1,42 @@
 <template>
   <div class="friend_moments">
-    <div class="water">
-      <div class="piping" ref="pipingone">
-        <MineShare
-          class="card"
-          v-for="(item, index) in list1"
-          :key="index"
-          :shareImg="item.shareImg"
-          :shareComment="item.shareComment"
-          :userPhoto="item.userPhoto"
-          :userName="item.userName"
-          :good="item.good"
-          :like="item.like"
-        ></MineShare>
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <div class="water">
+        <div class="piping" ref="pipingone">
+          <MineShare
+            class="card"
+            v-for="(item, index) in list1"
+            :key="index"
+            :shareImg="item.shareImg"
+            :shareComment="item.shareComment"
+            :userPhoto="item.userPhoto"
+            :userName="item.userName"
+            :good="item.good"
+            :like="item.like"
+          ></MineShare>
+        </div>
+        <div class="piping" ref="pipingtwo">
+          <MineShare
+            class="card"
+            v-for="(item, index) in list2"
+            :key="index"
+            :shareImg="item.shareImg"
+            :shareComment="item.shareComment"
+            :userPhoto="item.userPhoto"
+            :userName="item.userName"
+            :good="item.good"
+            :like="item.like"
+          ></MineShare>
+        </div>
       </div>
-      <div class="piping" ref="pipingtwo">
-        <MineShare
-          class="card"
-          v-for="(item, index) in list2"
-          :key="index"
-          :shareImg="item.shareImg"
-          :shareComment="item.shareComment"
-          :userPhoto="item.userPhoto"
-          :userName="item.userName"
-          :good="item.good"
-          :like="item.like"
-        ></MineShare>
-      </div>
-    </div>
+    </van-list>
   </div>
 </template>
 <script>
 import MineShare from "../views/Mine/MineChind.vue/MineShare";
+import { mapGetters, mapState } from "vuex";
 export default {
+  name: "Cascadeflow",
   data() {
     return {
       imgs: require("../assets/indexPage/tou1@3x.png"),
@@ -70,29 +74,85 @@ export default {
         require("../assets/IMGS/IMG_1339.jpg"),
         require("../assets/IMGS/IMG_1340.jpg")
       ],
+      list: [],
+      loading: false,
+      finished: false,
       available: 1,
       height1: 0,
       height2: 0,
       height3: 0,
       page: 1,
       list1: [],
-      list2: []
+      list2: [],
+      datas: null
     };
   },
+  props: ["itemtype"],
   components: {
     MineShare
   },
+  watch: {
+    itemtype(val) {
+      (this.moments = []),
+        (this.list = []),
+        (this.available = 1),
+        (this.height1 = 0),
+        (this.height2 = 0),
+        (this.height3 = 0),
+        (this.page = 1),
+        (this.list1 = []),
+        (this.list2 = []),
+        this.onLoad();
+    }
+  },
+  computed: {
+    ...mapState(["ContentDataOne"]),
+    momentss() {
+      return this.ContentDataOne;
+    }
+  },
   created() {
     // 获取第一页数据
-    this.fetchMoments();
+    console.log("jiushi");
+    console.log(this.momentss);
+    // this.$axios
+    //   .get("/fuwu/getimgdata/getarticles", {
+    //     params: { type: this.itemtype }
+    //   })
+    //   .then(res => {
+    //     this.datas = res.data.data;
+    //     this.moments = res.data.data;
+    //     console.log(this.moments);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+    // this.fetchMoments();
     window.addEventListener("scroll", this.scrollHandle, true);
   },
   mounted() {
     // 用来监听滚轮
   },
   methods: {
+    onLoad() {
+      // 异步更新数据
+      // setTimeout 仅做示例，真实场景中一般为 ajax 请求
+      setTimeout(() => {
+        for (let i = 0; i < 10; i++) {
+          this.list.push(this.list.length + 1);
+        }
+        this.fetchMoments();
+        // 加载状态结束
+        this.loading = false;
+
+        // 数据全部加载完成
+        if (this.list.length >= 40) {
+          this.finished = true;
+        }
+      }, 1000);
+    },
     fetchMoments() {
-      console.log("asdsa");
+      // console.log("asdsa");
       // 请求接口方法
       // fetch("./jsonas.json")
       //   .then(res => res.json())
@@ -101,17 +161,31 @@ export default {
       //     // 分配数据到指定管道
       //     this.sort(0);
       //   });
-      this.sort(0);
+      this.$axios
+        .get("/fuwu/getimgdata/getarticles", {
+          params: { type: this.itemtype }
+        })
+        .then(res => {
+          this.datas = res.data.data;
+          this.moments = res.data.data;
+          this.sort(0);
+          // console.log(this.moments);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      // this.sort(0);
     },
     // sort()函数是递归的，因为要确保每个卡片的图片加载完成后再获取管道的高度，但是图片加载完成的函数是个异步函数，
     // 如果放在for循环中会打乱顺序，因此要使异步函数同步执行，for循环改为递归。
     sort(j) {
       if (j < this.moments.length) {
+        console.log(this.moments);
         let that = this;
         // 创建Image类
         var newImg = new Image();
         // 获取要加载的图片地址
-        newImg.src = this.moments[j];
+        newImg.src = that.moments[j].photo.split(",")[0];
 
         // 图片加载完成后（异步）
         newImg.onload = newImg.imgArr = () => {
@@ -139,17 +213,23 @@ export default {
           //   </div>`;
           //给最小的管道添加卡片
           let a = {
-            shareImg: this.moments[j],
-            shareComment: "慢生活",
-            userPhoto: require("../assets/minePage/HeadONE.pic@3x.png"),
-            userName: "CNU",
-            good: 520,
+            shareImg: that.moments[j].photo.split(",")[0],
+            // shareImg: this.moments[j],
+            // this.moments[j].theme
+            // shareComment: "慢生活",
+            shareComment: that.moments[j].theme,
+            userPhoto: that.moments[j].profile,
+            // userPhoto: require("../assets/minePage/HeadONE.pic@3x.png"),
+            userName: that.moments[j].nickname,
+            // userName: "CNU",
+            good: that.moments[j].zdNum,
+            // good: 520,
             like: require("../assets/minePage/liked@3x.png")
           };
           if (min == 0) {
-            this.list1.push(a);
+            that.list1.push(a);
           } else if (min == 1) {
-            this.list2.push(a);
+            that.list2.push(a);
           }
           that.sort(j + 1);
         };
@@ -209,7 +289,7 @@ export default {
 //   background: #eee;
 // }
 .water {
-  margin-top: 20px;
+  // margin-top: 20px;
   display: flex;
   align-items: flex-start;
   margin-bottom: 20px;

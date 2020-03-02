@@ -16,7 +16,7 @@
       <img v-if="swipers.length>1" class="mores" src="../../assets/indexPage/mores@3x.png" alt />
       <swiper>
         <swiperSlide v-for="(item, i) in swipers" :key="i">
-          <img :src="item" alt />
+          <img :src="item" alt v-lazy="item" />
         </swiperSlide>
       </swiper>
     </div>
@@ -52,10 +52,12 @@ export default {
   },
   props: ["reledata"],
   created() {
-    console.log(this.reledata);
-    console.log(this.reledata.photo);
+    // console.log(this.reledata.photo);
+    // if (this.reledata.photo.indexOf(",") != -1) {
     this.swipers = this.reledata.photo.split(",");
-    console.log(this.swipers);
+    // } else {
+    //   this.swipers = this.reledata.photo;
+    // }
   }
 };
 </script>

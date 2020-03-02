@@ -20,11 +20,32 @@ export default {
     LWHeader,
     LWFooter
   },
+  computed: {
+    ...mapState(["ContData"])
+  },
   created() {
     this.action_userinfo(JSON.parse(localStorage.getItem("userInfo")));
+    let that = this;
+    function sasd() {
+      return new Promise((res, req) => {
+        that.$axios
+          .get("/fuwu/getimgdata/getarticle")
+          .then(data => {
+            res(data.data.data);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      });
+    }
+    sasd().then(data => {
+      this.action_ContentData(data);
+      // console.log(this.releDatas);
+    });
   },
   methods: {
     ...mapActions(["action_userinfo"]),
+    ...mapActions(["action_ContentData"]),
     goto(id) {
       this.$router.push(id);
     }

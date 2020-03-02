@@ -7,10 +7,14 @@
       </div>
       <div class="homemore-conten">
         <div class="gun">
-          <Moreitem v-for="i in 5" :key="i"></Moreitem>
+          <Moreitem v-for="(item,index) in yizhus" :key="index" :items="item"></Moreitem>
         </div>
       </div>
-      <Dynamic v-for="(item,index) in releDatas" :key="index" :reledata="item"></Dynamic>
+      <Dynamic
+        v-for="(item,index) in $store.state.ContData.ContentData"
+        :key="index"
+        :reledata="item"
+      ></Dynamic>
     </div>
   </div>
 </template>
@@ -19,14 +23,14 @@
 // @ is an alias to /src
 import Moreitem from "../../components/Home/moreitem";
 import Dynamic from "../../components/Home/dynamic";
-import { mapState } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import { Dialog } from "vant";
 
 export default {
   name: "Home",
   data() {
     return {
-      releDatas: []
+      // releDatas: this.$store.state.ContData.ContentData
     };
   },
   components: {
@@ -34,12 +38,20 @@ export default {
     Dynamic
   },
   computed: {
-    ...mapState(["UserInfoData"])
+    ...mapState(["UserInfoData"]),
+    ...mapState(["ContData"]),
+    ...mapGetters(["yizhu"]),
+    yizhus() {
+      return this.yizhu;
+    }
+  },
+  methods: {
+    ...mapActions(["action_ContentData"])
   },
   created() {
-    console.log(this.UserInfoData);
+    // console.log(this.UserInfoData);
     let token = localStorage.getItem("userToken");
-    console.log(token);
+    // console.log(token);
     // let url = "/auth";
     if (!token) {
       this.$router.push("/login");
@@ -50,7 +62,7 @@ export default {
         url: "/fuwu/auth"
       })
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (res.data.code === 409) {
             Dialog.alert({
               title: "小足提醒",
@@ -63,11 +75,14 @@ export default {
               .get("/fuwu/getimgdata/getarticle")
               .then(data => {
                 this.releDatas = data.data.data;
-                console.log(this.releDatas);
+                this.action_ContentData(data.data.data);
+                // console.log(this.releDatas);
+                console.log(this.yizhu);
               })
               .catch(err => {
                 console.log(err);
               });
+            console.log(this.ContData);
           }
         })
         .catch(err => {
