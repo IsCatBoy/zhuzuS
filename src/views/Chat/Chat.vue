@@ -29,6 +29,7 @@
 </template>
 <script>
 import { MessageBox } from "mint-ui";
+import { mapState } from "vuex";
 export default {
   name: "Chat",
   data() {
@@ -48,20 +49,26 @@ export default {
     // this.showDialog();
   },
   mounted() {
+    console.log(this.$route.params.chatname);
+
     this.scrollToBottom();
 
     let vm = this;
-    let user = localStorage.getItem("WEB_IM_USER");
+    // let user = localStorage.getItem("WEB_IM_USER");
 
-    user = (user && JSON.parse(user)) || {};
-    console.log(user);
-    vm.uid = user.uid;
-    vm.nickname = user.nickname;
-    if (!vm.uid) {
-      vm.showDialog();
-    } else {
-      vm.conWebSocket();
-    }
+    // user = (user && JSON.parse(user)) || {};
+    // console.log(user);
+    // vm.uid = user.uid;
+    // vm.nickname = user.nickname;
+    // if (!vm.uid) {
+    vm.uid = this.$route.params.chatname;
+    vm.nickname = this.$route.params.chatname;
+    this.bridge = [this.$route.params.chatname, this.UserInfoData.user_id];
+    vm.conWebSocket();
+    // vm.showDialog();
+    // } else {
+    //   vm.conWebSocket();
+    // }
     document.onkeydown = function(event) {
       var e = event || window.event;
       if (e && e.keyCode == 13) {
@@ -74,6 +81,7 @@ export default {
     this.scrollToBottom();
   },
   computed: {
+    ...mapState(["UserInfoData"]),
     // 当前对话渲染的msg列表
     currentMessage() {
       let vm = this;
@@ -147,7 +155,8 @@ export default {
           uid: this.uid,
           type: type,
           nickname: this.nickname,
-          msg: msg
+          msg: msg,
+          bridge: this.bridge
         })
       );
       this.msg = "";
@@ -161,19 +170,21 @@ export default {
 
         socket.onopen = function(e) {
           console.log("连接服务器成功");
-          if (!vm.uid) {
-            // 生成新的用户id,并存入localStorage
-            // eslint-disable-next-line no-undef
-            vm.uid = "web_im_" + vm.nickname;
-            localStorage.setItem(
-              "WEB_IM_USER",
-              JSON.stringify({
-                uid: vm.uid,
-                nickname: vm.nickname
-              })
-            );
-            vm.sendMessage(1);
-          }
+          // vm.sendMessage(1);
+          // if (!vm.uid) {
+          //   // 生成新的用户id,并存入localStorage
+          //   // eslint-disable-next-line no-undef
+          //   vm.uid = "web_im_" + vm.nickname;
+          //   localStorage.setItem(
+          //     "WEB_IM_USER",
+          //     JSON.stringify({
+          //       uid: vm.uid,
+          //       nickname: vm.nickname
+          //     })
+          //   );
+          //   console.log(localStorage.getItem("WEB_IM_USER"));
+          //   vm.sendMessage(1);
+          // }
         };
         socket.onclose = function(e) {
           console.log("服务器关闭");

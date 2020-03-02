@@ -8,8 +8,11 @@
         <div class="time">{{ itemdata.time }}</div>
       </div>
     </div>
-    <div class="Giveupwei" v-if="false">
+    <div class="Giveupwei" v-if="ids == 1 || ids == 2">
       <img :src="itemdata.taisrc" alt srcset />
+    </div>
+    <div class="Giveupweis" v-else-if="ids == 4 || ids == 0">
+      <div class="btn btns" @click="gochat(itemdata.name)">去聊天</div>
     </div>
     <div class="Giveupweis" v-else>
       <div class="btn btns">互相关注</div>
@@ -23,7 +26,19 @@ export default {
     return {};
   },
   props: {
-    itemdata: Object
+    itemdata: Object,
+    ids: Number
+  },
+  methods: {
+    gochat(val) {
+      this.$router.push({
+        name: "Chat",
+        params: {
+          chatname: val
+        }
+      });
+      console.log(val);
+    }
   }
 };
 </script>

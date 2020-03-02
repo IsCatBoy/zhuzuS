@@ -144,8 +144,7 @@ export default {
         this.fetchMoments();
         // 加载状态结束
         this.loading = false;
-
-        // 数据全部加载完成
+        // 数据全部加载完成;
         if (this.list.length >= 40) {
           this.finished = true;
         }
@@ -234,39 +233,39 @@ export default {
           that.sort(j + 1);
         };
       }
-    },
-    scrollHandle() {
-      // 获取页面页面的滚动高度
-      this.height2 = document.getElementsByClassName("page")[0].scrollHeight;
-      this.height1 = document.getElementsByClassName("page")[0].scrollTop;
-      this.height3 = document.getElementsByClassName("page")[0].clientHeight;
-      // 如果滚动到最低（这里设置离最底还有100距离才触发函数）
-      // available条件是为了防止触底时一直不断地请求。因此，请求一次后available设为0，直到滚动到离底部超过100距离（即数据加载玩后）才设为1
-      if (this.height3 + this.height1 >= this.height2 - 100 && this.available) {
-        //请求下一页
-        this.page++;
-        this.available = 0;
-        let asd = this.moments;
-        console.log(asd);
-        // let that = this;
-        // fetch("./jsonas.json")
-        //   .then(res => res.json())
-        //   .then(res => {
-        //     that.moments = res.data;
-        //     if (that.moments[0]) {
-        //       that.sort(0);
-        //     } else {
-        //       that.page--;
-        //     }
-        //   });
-        if (this.list1.length + this.list2.length < 100) {
-          this.moments = [...asd, ...asd];
-          this.sort(0);
-        }
-      } else if (this.height3 + this.height1 < this.height2 - 100) {
-        this.available = 1;
-      }
     }
+    // scrollHandle() {
+    //   // 获取页面页面的滚动高度
+    //   this.height2 = document.getElementsByClassName("page")[0].scrollHeight;
+    //   this.height1 = document.getElementsByClassName("page")[0].scrollTop;
+    //   this.height3 = document.getElementsByClassName("page")[0].clientHeight;
+    //   // 如果滚动到最低（这里设置离最底还有100距离才触发函数）
+    //   // available条件是为了防止触底时一直不断地请求。因此，请求一次后available设为0，直到滚动到离底部超过100距离（即数据加载玩后）才设为1
+    //   if (this.height3 + this.height1 >= this.height2 - 100 && this.available) {
+    //     //请求下一页
+    //     this.page++;
+    //     this.available = 0;
+    //     let asd = this.moments;
+    //     console.log(asd);
+    //     // let that = this;
+    //     // fetch("./jsonas.json")
+    //     //   .then(res => res.json())
+    //     //   .then(res => {
+    //     //     that.moments = res.data;
+    //     //     if (that.moments[0]) {
+    //     //       that.sort(0);
+    //     //     } else {
+    //     //       that.page--;
+    //     //     }
+    //     //   });
+    //     if (this.list1.length + this.list2.length < 100) {
+    //       this.moments = [...asd, ...asd];
+    //       this.sort(0);
+    //     }
+    //   } else if (this.height3 + this.height1 < this.height2 - 100) {
+    //     this.available = 1;
+    //   }
+    // }
   },
   destroyed() {
     // 页面卸载时移除监听事件
