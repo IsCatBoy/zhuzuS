@@ -55,12 +55,12 @@ export default {
           name: "我的",
           path: "/mine"
         },
-        {
-          icon: "mineicon",
-          active: "selmineicon",
-          name: "登录",
-          path: "/login"
-        }
+        // {
+        //   icon: "mineicon",
+        //   active: "selmineicon",
+        //   name: "登录",
+        //   path: "/login"
+        // }
       ]
     };
   },
