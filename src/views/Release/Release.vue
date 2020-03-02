@@ -72,7 +72,7 @@
         />
       </van-cell>
     </div>
-    <van-button type="primary" @click="Uploadbutton">主要按钮</van-button>
+    <!-- <van-button type="primary" @click="Uploadbutton">主要按钮</van-button> -->
     <div id="qrcode"></div>
   </div>
 </template>
@@ -197,7 +197,7 @@ export default {
 
     ReleaseBtn() {
       let data = new FormData();
-      this.ReleaseData.NewsfileList;
+      // this.ReleaseData.NewsfileList;
       // for (var i = 0; i < this.ReleaseData.NewsfileList.length; i++) {
       //   data.append("NewsfileList", this.ReleaseData.NewsfileList[i].file);
       // }

@@ -10,7 +10,7 @@
           <Moreitem v-for="i in 5" :key="i"></Moreitem>
         </div>
       </div>
-      <Dynamic v-for="i in 4" :key="i"></Dynamic>
+      <Dynamic v-for="(item,index) in releDatas" :key="index" :reledata="item"></Dynamic>
     </div>
   </div>
 </template>
@@ -24,6 +24,11 @@ import { Dialog } from "vant";
 
 export default {
   name: "Home",
+  data() {
+    return {
+      releDatas: []
+    };
+  },
   components: {
     Moreitem,
     Dynamic
@@ -53,6 +58,16 @@ export default {
             }).then(() => {
               this.$router.push("/login");
             });
+          } else {
+            this.$axios
+              .get("/fuwu/getimgdata/getarticle")
+              .then(data => {
+                this.releDatas = data.data.data;
+                console.log(this.releDatas);
+              })
+              .catch(err => {
+                console.log(err);
+              });
           }
         })
         .catch(err => {

@@ -1,4 +1,5 @@
 import {
+  MUTAT_NEWLIST,
   MUTAT_NEWSFILELIST,
   MUTAT_NEWSTITLE,
   MUTAT_NewsContent,
@@ -32,6 +33,18 @@ export default {
     ]
   },
   mutations: {
+    //初始化发布内容
+    [MUTAT_NEWLIST](state, payload) {
+      state.NewsfileList = [];
+      state.NewsTitle = null;
+      state.NewsContent = null;
+      state.NewsTheme = null;
+      state.NewsPosition = null;
+      state.NewsArticletype = 1;
+      state.NewsSynBtn = true;
+      state.NewsSaveBtn = false;
+      state.NewsKeyflag = true;
+    },
     [MUTAT_NEWSFILELIST](state, payload) {
       state.NewsfileList = payload;
     },
@@ -62,7 +75,9 @@ export default {
   },
   actions: {
     // {commit, state, getters} = context;
-
+    action_NEWLIST(context, payload) {
+      context.commit(MUTAT_NEWLIST, payload);
+    },
     action_NewsfileList(context, payload) {
       context.commit(MUTAT_NEWSFILELIST, payload);
     },
@@ -94,24 +109,16 @@ export default {
   },
   getters: {
     NewsPositions: state => {
-      if (state.NewsPosition == null) {
+      if (state.NewsPosition == null || state.NewsPosition == "") {
         return "你的位置";
       } else return state.NewsPosition;
     },
     NewsThemes: state => {
-      if (state.NewsTheme == null) {
+      if (state.NewsTheme == null || state.NewsTheme == "") {
         return "添加主题";
       } else return state.NewsTheme;
     },
     Articletype: stats => {
-      //   let actions = [
-      //     { name: "穿搭", type: 1 },
-      //     { name: "彩妆", type: 2 },
-      //     { name: "美甲", type: 3 },
-      //     { name: "旅游", type: 4 },
-      //     { name: "摄影", type: 5 },
-      //     { name: "美食", type: 6 }
-      //   ];
       for (const item of stats.actions) {
         if (item.type == stats.NewsArticletype) {
           return item.name;

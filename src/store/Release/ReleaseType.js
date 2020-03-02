@@ -1,4 +1,6 @@
 // 修改上传图片
+const MUTAT_NEWLIST = "MUTAT_NEWLIST";
+// 修改上传图片
 const MUTAT_NEWSFILELIST = "MUTAT_NEWSFILELIST";
 //修改标题
 const MUTAT_NEWSTITLE = "MUTAT_NEWSTITLE";
@@ -17,6 +19,7 @@ const MUTAT_NewsArticletype = "MUTAT_NewsArticletype";
 //是否上推荐
 const MUTAT_NewsKeyflag = "MUTAT_NewsKeyflag";
 module.exports = {
+  MUTAT_NEWLIST,
   MUTAT_NEWSFILELIST,
   MUTAT_NEWSTITLE,
   MUTAT_NewsContent,

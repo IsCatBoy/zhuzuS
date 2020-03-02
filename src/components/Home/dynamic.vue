@@ -2,10 +2,10 @@
   <div class="Dynamic">
     <div class="header">
       <div class="toubu">
-        <img src="../../assets/indexPage/tou3@3x.png" alt srcset />
+        <img :src="reledata.profile" alt srcset />
         <div class="more">
-          <span class="name">CNU_blank</span>
-          <span class="time">1分钟前</span>
+          <span class="name">{{reledata.nickname}}</span>
+          <span class="time">{{reledata.create_time}}</span>
         </div>
       </div>
       <div class="morebtn">
@@ -13,24 +13,25 @@
       </div>
     </div>
     <div class="swipers">
+      <img v-if="swipers.length>1" class="mores" src="../../assets/indexPage/mores@3x.png" alt />
       <swiper>
-        <swiperSlide v-for="i in 5" :key="i">
-          <img src="../../assets/indexPage/261580746703_.pic@3x.png" alt />
+        <swiperSlide v-for="(item, i) in swipers" :key="i">
+          <img :src="item" alt />
         </swiperSlide>
       </swiper>
     </div>
     <div class="footer">
       <div class="item">
         <img src="../../assets/indexPage/likes@3x.png" alt />
-        <span class="num">12</span>
+        <span class="num">{{reledata.zdNum}}</span>
       </div>
       <div class="item">
         <img src="../../assets/indexPage/comment@3x.png" alt />
-        <span class="num">12</span>
+        <span class="num">{{reledata.plNum}}</span>
       </div>
       <div class="item">
         <img src="../../assets/indexPage/Forward@3x.png" alt />
-        <span class="num">12</span>
+        <span class="num">{{reledata.zfnum}}</span>
       </div>
     </div>
   </div>
@@ -41,11 +42,20 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
   name: "Dynamic",
   data() {
-    return {};
+    return {
+      swipers: [1, 2]
+    };
   },
   components: {
     swiper,
     swiperSlide
+  },
+  props: ["reledata"],
+  created() {
+    console.log(this.reledata);
+    console.log(this.reledata.photo);
+    this.swipers = this.reledata.photo.split(",");
+    console.log(this.swipers);
   }
 };
 </script>
@@ -77,6 +87,7 @@ export default {
       img {
         width: 0.35rem;
         height: 0.35rem;
+        border-radius: 50%;
       }
     }
     .morebtn {
@@ -87,9 +98,20 @@ export default {
     }
   }
   .swipers {
+    position: relative;
     height: auto;
+    .mores {
+      width: 0.2rem;
+      position: absolute;
+      top: 0.1rem;
+      right: 0.1rem;
+      z-index: 10;
+    }
     img {
       width: 100%;
+    }
+    .swiper-container {
+      max-height: 375px;
     }
   }
   .footer {
