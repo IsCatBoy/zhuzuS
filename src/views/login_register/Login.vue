@@ -81,7 +81,7 @@ export default {
             Toast({
               message: res.data.err,
               position: "middle",
-              duration: 5000
+              duration: 3000
             });
             console.log(res.data.err);
             vm.isShow = true;
@@ -117,7 +117,7 @@ export default {
         Toast({
           message: "请先输入账号或密码",
           position: "middle",
-          duration: 5000
+          duration: 3000
         });
       } else if (!/^1[34578]\d{9}$/.test(this.username)) {
         console.log("jin");
@@ -125,7 +125,7 @@ export default {
         Toast({
           message: "请正确输入11位手机号码",
           position: "middle",
-          duration: 5000
+          duration: 3000
         });
       } else if (
         !/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[$@!%*#?&])[A-Za-z\d$@!%*#?&]{6,}$/.test(
@@ -136,7 +136,7 @@ export default {
           message:
             "密码（最少6位，包括至少一位大写字母，一位小写字母，一个数字，一个特殊字符）",
           position: "middle",
-          duration: 5000
+          duration: 3000
         });
       } else {
         this.tBackGround = !this.tBackGround;
