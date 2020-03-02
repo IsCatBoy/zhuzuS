@@ -196,10 +196,10 @@ export default {
     }
   }
   .QRSet {
-    position: absolute;
+    position: relative;
     z-index: 2;
-    right: 0.17rem;
-    top: 0.325rem;
+    left: 3.2rem;
+    bottom: 4.25rem;
     .QRcode {
       width: 0.15rem;
       display: inline-block;
