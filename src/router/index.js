@@ -152,14 +152,6 @@ const routes = [
         }
     },
     {
-        path: "/cleancooki",
-        name: "CleanCooki",
-        component: () => import("../views/Set/CleanCooki.vue"),
-        meta: {
-            title: "清理缓存"
-        }
-    },
-    {
         path: "/advice",
         name: "Advice",
         component: () => import("../views/Set/Advice.vue"),

@@ -21,7 +21,7 @@
         name="introduction"
         label="简介"
         placeholder="介绍一下自己吧"
-        :rules="[{ required: false, message: '请填写用户名' }]"
+        :rules="[{ required: false, message: '请介绍自己' }]"
       />
       <!-- 选择性别 -->
       <van-field
